@@ -64,4 +64,10 @@ export const products = [
     name: "Debit Card",
     icon: "💳",
   },
+
+     {
+    id: 13,
+    name: "Debit Card",
+    icon: "💳",
+  },
 ];
