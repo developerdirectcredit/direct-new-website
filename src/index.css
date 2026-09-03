@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    scroll-behavior: smooth;
+  }
+
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    @apply bg-paper font-body text-[17px] leading-[1.75] text-ink/80 antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-ink;
+    font-variation-settings: "wdth" 100;
+  }
+
+  ::selection {
+    @apply bg-signal/15 text-ink;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-signal ring-offset-2 ring-offset-paper;
+  }
+}
+
+@layer components {
+  /* Eyebrow label — mono, wide-tracked, always paired with a hairline. */
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.22em] text-blue;
+  }
+
+  /* The ledger rule: a hairline with a short red tick at its start.
+     This is the page's structural signature — it marks every entry. */
+  .ledger-rule {
+    @apply relative h-px w-full bg-rule;
+  }
+  .ledger-rule::before {
+    content: "";
+    @apply absolute left-0 top-0 h-px w-10 bg-signal;
+  }
+
+  .card {
+    @apply rounded-none border border-rule bg-white transition duration-300;
+  }
+  .card:hover {
+    @apply border-blue/40 shadow-[0_18px_40px_-28px_rgba(11,27,58,0.55)];
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 px-6 py-3.5 font-mono text-xs uppercase tracking-[0.16em] transition;
+  }
+  .btn-solid {
+    @apply btn bg-blue text-white hover:bg-ink;
+  }
+  .btn-ghost {
+    @apply btn border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-white;
+  }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  }
+  .reveal.is-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
