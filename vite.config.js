@@ -13,6 +13,7 @@ export default defineConfig({
       usePolling: true,
       interval: 100,
     },
+    allowedHosts: true,
   },
   build: {
     assetsInlineLimit: single ? 100 * 1024 * 1024 : 4096,
