@@ -39,7 +39,9 @@ import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import SectionHead from "../components/SectionHead";
 import PageNavCta from "../components/PageNavCta";
-import { founder, insightsPage } from "../data/content";
+import { founder, insightsPage, insightsPageEn } from "../data/content";
+import useLanguage from "../hooks/useLanguage";
+import linkifyDirectCredit from "../utils/linkify";
 
 const heroStatIcons = { User, Rocket, Handshake, Award, Users, BookOpen };
 
@@ -142,7 +144,7 @@ function StatsGrid({ stats }) {
 }
 
 /* "मेरे विचार, आपके लिए" — horizontal card carousel linking down to each dedicated section. */
-function CoreInsights() {
+function CoreInsights({ page }) {
   const trackRef = useRef(null);
   const scrollBy = (dir) => {
     trackRef.current?.scrollBy({ left: dir * 300, behavior: "smooth" });
@@ -153,14 +155,14 @@ function CoreInsights() {
       <div className="mx-auto max-w-ledger px-5 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <p className="eyebrow">{insightsPage.coreHeading.eyebrow}</p>
+            <p className="eyebrow">{page.coreHeading.eyebrow}</p>
             <h2 className="mt-3 font-display text-[clamp(1.8rem,3.6vw,2.5rem)] font-extrabold leading-tight text-ink">
-              {insightsPage.coreHeading.titleLine1}{" "}
-              <span className="text-signal">{insightsPage.coreHeading.titleLine2}</span>
+              {page.coreHeading.titleLine1}{" "}
+              <span className="text-signal">{page.coreHeading.titleLine2}</span>
             </h2>
-            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink/60">{insightsPage.coreHeading.sub}</p>
+            <p className="mt-3 max-w-md text-[15px] leading-relaxed text-ink/60">{page.coreHeading.sub}</p>
             <a href="#leadership" className="mt-4 inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-blue">
-              {insightsPage.coreHeading.viewAllLabel} <ArrowRight className="h-3.5 w-3.5" />
+              {page.coreHeading.viewAllLabel} <ArrowRight className="h-3.5 w-3.5" />
             </a>
           </div>
 
@@ -187,7 +189,7 @@ function CoreInsights() {
         </div>
 
         <div ref={trackRef} className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2">
-          {insightsPage.sections.map((s, i) => {
+          {page.sections.map((s, i) => {
             const Icon = sectionIcons[s.icon];
             const theme = sectionThemes[s.icon];
             return (
@@ -256,7 +258,7 @@ function InsightSection({ section, slug, tint }) {
                     <ItemIcon className="h-5 w-5" />
                   </div>
                   <p className="mt-4 text-[15px] font-bold text-ink">{it.title}</p>
-                  <p className="mt-2.5 text-[15.5px] leading-relaxed text-ink/75">{it.text}</p>
+                  <p className="mt-2.5 text-[15.5px] leading-relaxed text-ink/75">{linkifyDirectCredit(it.text)}</p>
                 </Reveal>
               );
             })}
@@ -287,12 +289,15 @@ function InsightSection({ section, slug, tint }) {
 }
 
 export default function Insights() {
+  const [lang] = useLanguage();
+  const page = lang === "en" ? insightsPageEn : insightsPage;
+
   return (
     <div id="top">
       <Navbar />
 
       {/* ───────────── Banner: full-width image, same treatment as Home page ───────────── */}
-      <section className="pt-16 sm:pt-20">
+      <section className="pt-24 sm:pt-28">
         <div className="mx-auto max-w-[1600px] px-0 sm:px-5">
           <img
             src="/img/vision.JPG"
@@ -304,7 +309,7 @@ export default function Insights() {
 
         <Reveal delay={80} className="mx-auto max-w-3xl px-5 py-5 text-center sm:px-8 sm:py-7">
           <h1 className="text-[clamp(1.9rem,4.4vw,3.1rem)] font-bold leading-[1.15] text-signal">
-            {insightsPage.h1}
+            {page.h1}
           </h1>
         </Reveal>
       </section>
@@ -323,19 +328,19 @@ export default function Insights() {
                 }}
               />
               <Reveal className="relative">
-                <p className="eyebrow">{insightsPage.hero.eyebrow}</p>
+                <p className="eyebrow">{page.hero.eyebrow}</p>
                 <h1 className="mt-4 font-display text-[clamp(2rem,4.4vw,3.1rem)] font-extrabold leading-[1.15] text-ink">
-                  {insightsPage.hero.titleLead}
+                  {page.hero.titleLead}
                   <br />
-                  <span style={{ color: "#0F5D5A" }}>{insightsPage.hero.titleHighlight1}</span>{" "}
-                  {insightsPage.hero.titleSep}{" "}
-                  <span className="text-signal">{insightsPage.hero.titleHighlight2}</span>
+                  <span style={{ color: "#0F5D5A" }}>{page.hero.titleHighlight1}</span>{" "}
+                  {page.hero.titleSep}{" "}
+                  <span className="text-signal">{page.hero.titleHighlight2}</span>
                 </h1>
 
                 <div className="mt-6 space-y-4">
-                  {insightsPage.intro.paras.slice(0, 2).map((p, i) => (
+                  {page.intro.paras.slice(0, 2).map((p, i) => (
                     <p key={i} className="text-[16px] leading-relaxed text-ink/70">
-                      {p}
+                      {linkifyDirectCredit(p)}
                     </p>
                   ))}
                 </div>
@@ -345,7 +350,7 @@ export default function Insights() {
                   className="mt-8 inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[14px] font-semibold text-white transition hover:brightness-105"
                   style={{ backgroundColor: "#0F5D5A" }}
                 >
-                  {insightsPage.hero.ctaLabel} <ArrowRight className="h-4 w-4" />
+                  {page.hero.ctaLabel} <ArrowRight className="h-4 w-4" />
                 </a>
               </Reveal>
             </div>
@@ -353,7 +358,7 @@ export default function Insights() {
             {/* Right: photo */}
             <Reveal delay={100}>
               <img
-                src={insightsPage.hero.image}
+                src={page.hero.image}
                 alt={founder.name}
                 loading="lazy"
                 className="w-full rounded-3xl object-cover shadow-xl"
@@ -368,7 +373,7 @@ export default function Insights() {
             style={{ backgroundColor: "#0F5D5A" }}
           >
             <span className="font-display text-[38px] leading-none text-white/40">&ldquo;</span>
-            <p className="-mt-4 max-w-2xl text-[16px] leading-relaxed sm:text-[17px]">{insightsPage.hero.quote}</p>
+            <p className="-mt-4 max-w-2xl text-[16px] leading-relaxed sm:text-[17px]">{page.hero.quote}</p>
             <p className="mt-3 font-display text-[14px] text-white/80">- {founder.name}</p>
           </Reveal>
         </div>
@@ -376,7 +381,7 @@ export default function Insights() {
         {/* Stats bar — same metrics as About page, for a consistent brand story */}
         <Reveal delay={140} className="relative z-10 mx-auto mt-14 max-w-5xl px-5 sm:px-8">
           <div className="grid grid-cols-2 gap-6 rounded-2xl bg-white p-6 shadow-2xl sm:grid-cols-4 sm:p-8">
-            {insightsPage.hero.stats.map((s) => {
+            {page.hero.stats.map((s) => {
               const Icon = heroStatIcons[s.icon];
               return (
                 <div key={s.label} className="flex items-center gap-3">
@@ -395,24 +400,24 @@ export default function Insights() {
       </section>
 
       {/* ───────────── My Core Insights: horizontal card carousel ───────────── */}
-      <CoreInsights />
+      <CoreInsights page={page} />
 
       {/* ───────────── Closing quote banner ───────────── */}
       <section className="py-10" style={{ backgroundColor: "#0F5D5A" }}>
         <div className="mx-auto flex max-w-ledger flex-wrap items-center justify-between gap-6 px-5 sm:px-8">
           <p className="flex items-start gap-3 text-[16px] leading-relaxed text-white/90 sm:text-[18px]">
             <span className="font-display text-[32px] leading-none text-white/40">&ldquo;</span>
-            {insightsPage.closingQuote.text}
+            {linkifyDirectCredit(page.closingQuote.text)}
           </p>
           <p className="font-display text-[16px] shrink-0 text-white/70">- {founder.name}</p>
         </div>
       </section>
 
       {/* ───────────── Quick stats: social & network, at a glance ───────────── */}
-      <StatsGrid stats={insightsPage.stats} />
+      <StatsGrid stats={page.stats} />
 
       {/* ───────────── Dedicated section per category, each its own div ───────────── */}
-      {insightsPage.sections.map((s, i) => (
+      {page.sections.map((s, i) => (
         <InsightSection key={s.title} section={s} slug={sectionSlugs[i]} tint={i % 2 === 1} />
       ))}
 

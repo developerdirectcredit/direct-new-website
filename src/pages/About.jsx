@@ -1,104 +1,68 @@
 import { useState } from "react";
-import { ArrowRight, User, Rocket, Handshake, Award, Users, ChevronDown } from "lucide-react";
+import { ArrowRight, User, Rocket, Handshake, Award, Users, ChevronDown, GraduationCap, HeartHandshake, Flag, Quote, TrendingUp } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import PageNavCta from "../components/PageNavCta";
-import { founder, aboutPage } from "../data/content";
+import { founder, aboutPage, aboutPageEn } from "../data/content";
+import useLanguage from "../hooks/useLanguage";
+import useHashScroll from "../hooks/useHashScroll";
+import linkifyDirectCredit from "../utils/linkify";
 
-const heroStatIcons = { User, Rocket, Handshake, Award, Users };
+const heroStatIcons = { User, Rocket, Handshake, Award, Users, TrendingUp };
+const groupIcons = { GraduationCap, HeartHandshake, Flag };
+const groupThemes = {
+  amber: { ring: "border-amber-200", wash: "bg-amber-50", iconBg: "bg-amber-100", iconText: "text-amber-600", title: "text-amber-700" },
+  emerald: { ring: "border-emerald-200", wash: "bg-emerald-50", iconBg: "bg-emerald-100", iconText: "text-emerald-600", title: "text-emerald-700" },
+  sky: { ring: "border-sky-200", wash: "bg-sky-50", iconBg: "bg-sky-100", iconText: "text-sky-600", title: "text-sky-700" },
+};
 
 export default function About() {
   const [expanded, setExpanded] = useState({});
+  const [lang] = useLanguage();
+  useHashScroll();
+  const page = lang === "en" ? aboutPageEn : aboutPage;
   return (
     <div id="top">
       <Navbar />
 
-      {/* ───────────── Hero: split panel, photo right, stats bar overlap ───────────── */}
-      <section className="relative overflow-hidden pt-16 pb-8 sm:pt-20 sm:pb-10">
-        <div className="grid lg:grid-cols-2">
-          {/* Left: text panel */}
-          <div className="relative bg-paper px-5 py-14 sm:px-10 lg:py-20">
-            <div
-              className="pointer-events-none absolute left-0 top-0 h-40 w-40 opacity-40"
-              style={{
-                backgroundImage: "radial-gradient(rgba(15,93,90,0.25) 1.5px, transparent 1.5px)",
-                backgroundSize: "16px 16px",
-              }}
-            />
-            <Reveal className="relative max-w-lg">
-              <p className="eyebrow">{aboutPage.hero.eyebrow}</p>
-              <h1 className="mt-4 whitespace-nowrap font-display text-[clamp(1.5rem,3.6vw,3.1rem)] font-extrabold uppercase leading-[1.1] text-ink">
-                {aboutPage.hero.titlePlain}{" "}
-                <span style={{ color: "#1338A0" }}>{aboutPage.hero.titleHighlightBlue}</span>{" "}
-                <span style={{ color: "#E31E24" }}>{aboutPage.hero.titleHighlightRed}</span>{" "}
-                {aboutPage.hero.titleSuffix}
-              </h1>
-              <p className="mt-3 text-[18px] font-medium text-ink/70">{aboutPage.hero.role}</p>
-
-              <blockquote className="mt-6 border-l-2 pl-4" style={{ borderColor: "#0F5D5A" }}>
-                <p className="text-[16px] leading-relaxed text-ink/70">
-                  {aboutPage.sub}
-                </p>
-              </blockquote>
-
-              <div className="mt-8 flex flex-wrap items-center gap-5">
-                <a
-                  href="#story"
-                  className="inline-flex items-center gap-2 rounded-xl px-6 py-3.5 text-[14px] font-semibold text-white transition hover:brightness-105"
-                  style={{ backgroundColor: "#0F5D5A" }}
-                >
-                  {aboutPage.hero.ctaLabel} <ArrowRight className="h-4 w-4" />
-                </a>
-              </div>
-            </Reveal>
-          </div>
-
-          {/* Right: photo + quote card */}
-          <Reveal delay={100} className="relative min-h-[320px]">
-            <img
-              src={aboutPage.hero.image}
-              alt={founder.name}
-              loading="lazy"
-              className="h-full w-full object-cover"
-            />
-            <div
-              className="absolute right-6 top-6 max-w-[15rem] rounded-2xl p-6 text-white shadow-2xl sm:right-10 sm:top-10"
-              style={{ backgroundColor: "#0F5D5A" }}
-            >
-              <span className="font-display text-[38px] leading-none text-white/40">&ldquo;</span>
-              <p className="-mt-4 text-[16px] leading-relaxed">{aboutPage.hero.quote}</p>
-              <p className="mt-3 font-display text-[14px] text-white/80">{founder.name}</p>
-            </div>
-          </Reveal>
+      {/* ───────────── Banner ───────────── */}
+      <section className="pt-24 sm:pt-28">
+        <div className="mx-auto max-w-[1600px] px-0 sm:px-5">
+          <img
+            src="/img/aboutbanner.png"
+            alt={founder.name}
+            loading="lazy"
+            className="w-full object-cover"
+          />
         </div>
-
-        {/* Floating stats bar */}
-        <Reveal delay={140} className="relative z-10 mx-auto -mt-14 max-w-5xl px-5 sm:px-8">
-          <div className="grid grid-cols-1 gap-6 rounded-2xl bg-white p-6 shadow-2xl sm:grid-cols-3 sm:p-8">
-            {aboutPage.hero.stats.map((s) => {
-              const Icon = heroStatIcons[s.icon];
-              return (
-                <div key={s.label} className="flex items-center gap-3">
-                  <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-blue-soft" style={{ color: "#0F5D5A" }}>
-                    <Icon className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="font-display text-[19px] font-extrabold leading-none text-ink">{s.stat}</p>
-                    <p className="mt-1 text-[12px] leading-tight text-ink/55">{s.label}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </Reveal>
       </section>
 
-      <div className="border-t border-rule">
+      {/* Stats bar */}
+      <Reveal delay={140} className="relative z-10 mx-auto -mt-14 max-w-5xl px-5 sm:px-8">
+        <div className="grid grid-cols-1 gap-6 rounded-2xl bg-white p-6 shadow-2xl sm:grid-cols-2 sm:p-8 lg:grid-cols-4">
+          {page.hero.stats.map((s) => {
+            const Icon = heroStatIcons[s.icon];
+            return (
+              <div key={s.label} className="flex items-center gap-3">
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-blue-soft" style={{ color: "#0F5D5A" }}>
+                  <Icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <p className="font-display text-[19px] font-extrabold leading-none text-ink">{s.stat}</p>
+                  <p className="mt-1 text-[12px] leading-tight text-ink/55">{s.label}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </Reveal>
+
+      <div id="my-journey" className="scroll-mt-24 border-t border-rule">
         <div className="mx-auto max-w-3xl px-5 py-3 text-center sm:px-8 sm:py-4">
           <Reveal>
             <h2 className="text-[clamp(1.9rem,4.4vw,3.1rem)] font-bold leading-[1.15] text-signal">
-              {aboutPage.story.title}
+              {page.story.title}
             </h2>
           </Reveal>
         </div>
@@ -108,20 +72,66 @@ export default function About() {
       <section id="story" className="border-y border-rule bg-white py-10 sm:py-14">
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
           <div className="space-y-14">
-            {aboutPage.story.sections.map((s, i) => {
-              const canCollapse = s.paras.length > 1 && !s.image;
+            {page.story.sections.map((s, i) => {
+              const previewCount = s.previewCount || 1;
+              const canCollapse = s.paras.length > previewCount;
               const isOpen = !!expanded[i];
-              const visibleParas = canCollapse && !isOpen ? s.paras.slice(0, 1) : s.paras;
+              const visibleParas = canCollapse && !isOpen ? s.paras.slice(0, previewCount) : s.paras;
 
               const body = (
                 <>
                   <h3 className="text-[22px] font-bold text-ink">{s.heading}</h3>
                   <div className="mt-3 space-y-4">
-                    {visibleParas.map((p, j) => (
-                      <p key={j} className="text-[18px] leading-[1.85] text-ink/90">
-                        {p}
-                      </p>
-                    ))}
+                    {visibleParas.map((p, j) => {
+                      if (typeof p === "object" && p.lead) {
+                        return (
+                          <div key={j} className="space-y-2">
+                            <p
+                              className={`text-[18px] leading-[1.85] ${
+                                p.boldLead ? "font-bold text-ink" : "text-ink/90"
+                              }`}
+                            >
+                              {linkifyDirectCredit(p.lead)}
+                            </p>
+                            <blockquote className="relative border-l-2 border-signal bg-blue-soft/60 p-6">
+                              <p className="font-display text-[20px] font-medium leading-relaxed text-ink">
+                                &ldquo;{linkifyDirectCredit(p.quote)}&rdquo;
+                              </p>
+                            </blockquote>
+                          </div>
+                        );
+                      }
+                      if (typeof p === "object" && p.list) {
+                        return (
+                          <ul key={j} className="list-disc space-y-1.5 pl-5 text-[18px] leading-[1.85] text-ink/90">
+                            {p.list.map((item, k) => (
+                              <li key={k}>{linkifyDirectCredit(item)}</li>
+                            ))}
+                          </ul>
+                        );
+                      }
+                      if (typeof p === "object" && p.bold) {
+                        return (
+                          <p key={j} className="text-[18px] font-bold leading-[1.85] text-ink">
+                            {linkifyDirectCredit(p.bold)}
+                          </p>
+                        );
+                      }
+                      if (typeof p === "object") {
+                        return (
+                          <blockquote key={j} className="relative border-l-2 border-signal bg-blue-soft/60 p-6">
+                            <p className="font-display text-[20px] font-medium leading-relaxed text-ink">
+                              &ldquo;{linkifyDirectCredit(p.quote)}&rdquo;
+                            </p>
+                          </blockquote>
+                        );
+                      }
+                      return (
+                        <p key={j} className="text-[18px] leading-[1.85] text-ink/90">
+                          {linkifyDirectCredit(p)}
+                        </p>
+                      );
+                    })}
                   </div>
                   {canCollapse && (
                     <button
@@ -135,63 +145,92 @@ export default function About() {
                       />
                     </button>
                   )}
+
+                  {s.groups && (
+                    <div className="mt-6 grid items-start gap-4 sm:grid-cols-3">
+                      {s.groups.map((g) => {
+                        const GroupIcon = groupIcons[g.icon];
+                        const t = groupThemes[g.theme] || groupThemes.amber;
+                        return (
+                          <div
+                            key={g.title}
+                            className={`rounded-2xl border ${t.ring} ${t.wash} p-4`}
+                          >
+                            <div className="flex flex-col items-center text-center">
+                              <div className={`flex h-12 w-12 items-center justify-center rounded-full ${t.iconBg}`}>
+                                {GroupIcon && <GroupIcon className={`h-5 w-5 ${t.iconText}`} />}
+                              </div>
+                              <h4 className={`mt-2 text-[16px] font-bold leading-tight ${t.title}`}>
+                                {g.title} {g.subtitle}
+                              </h4>
+                            </div>
+                            <div className="mt-3 space-y-2">
+                              {g.quotes.map((q, k) => (
+                                <div key={k} className="flex gap-2 rounded-lg border border-ink/10 bg-white p-2.5">
+                                  <Quote className={`mt-0.5 h-3.5 w-3.5 shrink-0 ${t.iconText}`} />
+                                  <p className="text-[13px] leading-relaxed text-ink/85">{q}</p>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {s.closingParas && (
+                    <div className="mt-6 space-y-4">
+                      {s.closingParas.map((p, j) => (
+                        <div key={j} className="space-y-2">
+                          <p className="text-[18px] leading-[1.85] text-ink/90">{p.lead}</p>
+                          <blockquote className="relative border-l-2 border-signal bg-blue-soft/60 p-6">
+                            <p className="font-display text-[20px] font-medium leading-relaxed text-ink">
+                              &ldquo;{p.quote}&rdquo;
+                            </p>
+                          </blockquote>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </>
               );
 
               if (s.image) {
                 return (
-                  <Reveal key={s.heading} delay={i * 70} className="grid items-start gap-10 lg:grid-cols-2">
+                  <Reveal
+                    key={s.heading}
+                    id={s.id}
+                    delay={i * 70}
+                    className={`grid items-start gap-10 lg:grid-cols-2 ${s.id ? "scroll-mt-24" : ""}`}
+                  >
                     <div>{body}</div>
-                    <img
-                      src={s.image}
-                      alt={s.heading}
-                      loading="lazy"
-                      className="mx-auto max-h-[420px] w-auto rounded-3xl object-contain shadow-xl"
-                    />
+                    {s.imageLink ? (
+                      <a href={s.imageLink} target="_blank" rel="noopener noreferrer">
+                        <img
+                          src={s.image}
+                          alt={s.heading}
+                          loading="lazy"
+                          className="mx-auto max-h-[420px] w-auto rounded-3xl object-contain shadow-xl transition hover:opacity-90"
+                        />
+                      </a>
+                    ) : (
+                      <img
+                        src={s.image}
+                        alt={s.heading}
+                        loading="lazy"
+                        className="mx-auto max-h-[420px] w-auto rounded-3xl object-contain shadow-xl"
+                      />
+                    )}
                   </Reveal>
                 );
               }
 
               return (
-                <Reveal key={s.heading} delay={i * 70} className="max-w-3xl">
+                <Reveal key={s.heading} id={s.id} delay={i * 70} className={`max-w-3xl ${s.id ? "scroll-mt-24" : ""}`}>
                   {body}
                 </Reveal>
               );
             })}
-          </div>
-
-          <Reveal delay={80} className="relative mt-14 max-w-3xl border-l-2 border-signal bg-blue-soft/60 p-6">
-            <p className="font-display text-[20px] font-medium leading-relaxed text-ink">
-              &ldquo;{aboutPage.story.quote}&rdquo;
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ───────────── भाग 2 — Personal Background ───────────── */}
-      <section className="py-10 sm:py-14">
-        <div className="mx-auto max-w-ledger px-5 sm:px-8">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {aboutPage.personal.sections.map((s, i) => (
-              <Reveal
-                key={s.heading}
-                delay={i * 80}
-                className="card p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-signal/40 hover:shadow-[0_18px_40px_-28px_rgba(11,27,58,0.55)]"
-              >
-                <h3 className="text-[19px] font-semibold text-ink">{s.heading}</h3>
-                {s.text && (
-                  <p className="mt-3 text-[17px] leading-relaxed text-ink/90">{s.text}</p>
-                )}
-                {s.placeholder && (
-                  <p className="mt-3 border border-dashed border-signal/40 bg-signal/5 p-3 font-mono text-[12px] leading-relaxed text-ink/55">
-                    <span className="font-semibold uppercase tracking-[0.1em] text-signal">
-                      Content pending -{" "}
-                    </span>
-                    {s.placeholder}
-                  </p>
-                )}
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>

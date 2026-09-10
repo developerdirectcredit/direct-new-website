@@ -4,15 +4,75 @@ import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import SectionHead from "../components/SectionHead";
 import PageNavCta from "../components/PageNavCta";
-import { founder, speakingVideos, speakingFacebookVideos } from "../data/content";
+import { founder, speakingVideos, speakingFacebookVideos, speakingFacebookVideosEn } from "../data/content";
+import useLanguage from "../hooks/useLanguage";
+
+const cardsHi = [
+  {
+    icon: Users,
+    title: "Fear se dosti",
+    text: "हर बड़ी उड़ान की शुरुआत डर को पहचानने और उसे accept करने से होती है।",
+    dark: true,
+  },
+  {
+    icon: Handshake,
+    title: "Advisory se Ownership tak",
+    text: "सलाह से आगे बढ़कर, जिम्मेदारी लेना ही बदलाव की असली शुरुआत है।",
+    dark: false,
+  },
+  {
+    icon: TrendingUp,
+    title: "Financial Inclusion",
+    text: "India में credit sabse zyada zaroorat walo tak pahuchna chahiye।",
+    dark: true,
+  },
+  {
+    icon: Target,
+    title: "Galti chhupana hi asli failure hai",
+    text: "पारदर्शिता और सही सोच से ही मजबूत रिश्ते और बेहतर फैसले बनते हैं।",
+    dark: false,
+  },
+];
+
+const cardsEn = [
+  {
+    icon: Users,
+    title: "Making Friends with Fear",
+    text: "Every big leap begins with recognising your fear and accepting it.",
+    dark: true,
+  },
+  {
+    icon: Handshake,
+    title: "From Advisory to Ownership",
+    text: "Moving beyond advice to taking ownership - that's where real change begins.",
+    dark: false,
+  },
+  {
+    icon: TrendingUp,
+    title: "Financial Inclusion",
+    text: "In India, credit should reach those who need it the most.",
+    dark: true,
+  },
+  {
+    icon: Target,
+    title: "Hiding a Mistake Is the Real Failure",
+    text: "Transparency and the right mindset are what build strong relationships and better decisions.",
+    dark: false,
+  },
+];
 
 export default function Speaking() {
+  const [lang] = useLanguage();
+  const isEn = lang === "en";
+  const cards = isEn ? cardsEn : cardsHi;
+  const facebookVideos = isEn ? speakingFacebookVideosEn : speakingFacebookVideos;
+
   return (
     <div id="top">
       <Navbar />
 
       {/* ───────────── Hero (banner, same as home page) ───────────── */}
-      <section className="pt-16 sm:pt-20">
+      <section className="pt-24 sm:pt-28">
         {/* Brand banner — same image at every screen size, no mobile switch. */}
         <div className="mx-auto max-w-[1600px] px-0 sm:px-5">
           <img
@@ -76,36 +136,13 @@ export default function Speaking() {
           </Reveal>
 
           <Reveal delay={60} className="mt-12 rounded-3xl bg-white p-8 shadow-xl sm:p-10">
-            <h2 className="text-[22px] font-bold text-ink">हर बातचीत से एक नई सीख</h2>
+            <h2 className="text-[22px] font-bold text-ink">
+              {isEn ? "A New Lesson from Every Conversation" : "हर बातचीत से एक नई सीख"}
+            </h2>
             <div className="mt-3 h-1 w-14 rounded-full bg-signal" />
 
             <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-              {[
-                {
-                  icon: Users,
-                  title: "Fear se dosti",
-                  text: "हर बड़ी उड़ान की शुरुआत डर को पहचानने और उसे accept करने से होती है।",
-                  dark: true,
-                },
-                {
-                  icon: Handshake,
-                  title: "Advisory se Ownership tak",
-                  text: "सलाह से आगे बढ़कर, जिम्मेदारी लेना ही बदलाव की असली शुरुआत है।",
-                  dark: false,
-                },
-                {
-                  icon: TrendingUp,
-                  title: "Financial Inclusion",
-                  text: "India में credit sabse zyada zaroorat walo tak pahuchna chahiye।",
-                  dark: true,
-                },
-                {
-                  icon: Target,
-                  title: "Galti chhupana hi asli failure hai",
-                  text: "पारदर्शिता और सही सोच से ही मजबूत रिश्ते और बेहतर फैसले बनते हैं।",
-                  dark: false,
-                },
-              ].map((item) => {
+              {cards.map((item) => {
                 const Icon = item.icon;
                 return (
                   <div key={item.title}>
@@ -170,7 +207,7 @@ export default function Speaking() {
           <SectionHead eyebrow="Facebook" title="Facebook Videos" />
 
           <div className="mt-12 grid gap-8 md:grid-cols-2">
-            {speakingFacebookVideos.map((v, i) => (
+            {facebookVideos.map((v, i) => (
               <Reveal key={v.url} delay={i * 90}>
                 <a
                   href={v.url}

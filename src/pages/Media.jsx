@@ -5,7 +5,8 @@ import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import SectionHead from "../components/SectionHead";
 import PageNavCta from "../components/PageNavCta";
-import { founder, mediaPage, mediaVideos, facebookVideos, mediaReels } from "../data/content";
+import { founder, mediaPage, mediaPageEn, mediaVideos, facebookVideos, facebookVideosEn, mediaReels } from "../data/content";
+import useLanguage from "../hooks/useLanguage";
 
 
 /* Har type/badge ka apna accent — rose, emerald, amber, violet, sky. */
@@ -56,12 +57,17 @@ function ReelCard({ r }) {
 }
 
 export default function Media() {
+  const [lang] = useLanguage();
+  const isEn = lang === "en";
+  const page = isEn ? mediaPageEn : mediaPage;
+  const fbVideos = isEn ? facebookVideosEn : facebookVideos;
+
   return (
     <div id="top">
       <Navbar />
 
       {/* ───────────── Banner: full-width image, same treatment as Home page ───────────── */}
-      <section className="pt-16 sm:pt-20">
+      <section className="pt-24 sm:pt-28">
         <div className="mx-auto max-w-[1600px] px-0 sm:px-5">
           <img
             src="/img/sir%20Website%20banner.jpg.jpeg"
@@ -74,7 +80,7 @@ export default function Media() {
 
       <Reveal delay={80} className="mx-auto max-w-3xl px-5 py-5 text-center sm:px-8 sm:py-7">
         <h1 className="text-[clamp(1.9rem,4.4vw,3.1rem)] font-bold leading-[1.15] text-signal">
-          {mediaPage.title}
+          {page.title}
         </h1>
       </Reveal>
 
@@ -95,7 +101,7 @@ export default function Media() {
           </div>
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {mediaPage.highlights.map((h, i) => {
+            {page.highlights.map((h, i) => {
               const theme = mediaThemes[h.theme];
               return (
                 <Reveal
@@ -189,7 +195,7 @@ export default function Media() {
           <SectionHead eyebrow="Interviews" title="Conversations that Inspire" />
 
           <div className="mt-12 grid gap-8 md:grid-cols-2">
-            {facebookVideos.map((v, i) => (
+            {fbVideos.map((v, i) => (
               <Reveal key={v.url} delay={i * 90}>
                 <a
                   href={v.url}

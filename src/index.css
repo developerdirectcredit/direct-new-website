@@ -9,10 +9,12 @@
 
   html {
     scroll-padding-top: 5rem;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-paper font-body text-[17px] leading-[1.75] text-ink/80 antialiased;
+    overflow-x: hidden;
   }
 
   h1,

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -21,30 +22,91 @@ import PageNavCta from "../components/PageNavCta";
 import {
   founder,
   story,
+  storyEn,
   impact,
+  impactEn,
   turningPoint,
+  turningPointEn,
   journey,
+  journeyEn,
   companies,
+  companiesEn,
   voices,
+  voicesEn,
   closingQuote,
+  closingQuoteEn,
+  awards,
+  awardsEn,
+  faqs,
+  faqsEn,
 } from "../data/content";
+import useLanguage from "../hooks/useLanguage";
+import linkifyDirectCredit from "../utils/linkify";
 
 const companyIcons = { Building2, Leaf, HandCoins, Cpu };
 
+const bannerSlides = ["/img/dcbanner%20(1).png", "/img/founder-banner.jpg"];
+
 export default function Founder() {
+  const [lang] = useLanguage();
+  const isEn = lang === "en";
+  const [bannerIndex, setBannerIndex] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setBannerIndex((i) => (i + 1) % bannerSlides.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, []);
+
+  const t = {
+    storyTitle: isEn
+      ? "Every hardworking person deserves a chance to move forward."
+      : "हर मेहनती इंसान को आगे बढ़ने का एक मौका मिलना चाहिए। ",
+    readFullStory: isEn ? "Read my full story" : "मेरी पूरी कहानी पढ़िए",
+    journeySub: isEn
+      ? "Every entry isn't a company - it's a lesson."
+      : "हर entry एक कंपनी नहीं - एक सीख है।",
+    recognitionTitle: isEn ? "Trust, recognised on stage" : "मंच पर मिला भरोसा",
+    recognitionSub: isEn
+      ? "The result of consistency, integrity and a relentless focus on customers. Tap a photo to see it in full."
+      : "Consistency, integrity और customers पर focus - इन्हीं का नतीजा। Photo par tap karke poori tasveer dekhein.",
+    seeAllMedia: isEn ? "See all media" : "पूरा मीडिया देखें",
+    companiesTitle: isEn ? "The companies we built" : "जो कंपनियाँ बनीं",
+    companiesSub: isEn
+      ? "Turning every idea into reality - these aren't just businesses, they're solutions to real problems."
+      : "हर विचार को हकीकत में बदलने का सफ़र - ये सिर्फ business नहीं, समस्याओं के समाधान हैं।",
+    faqTitle: isEn ? "Frequently Asked Questions" : "अक्सर पूछे जाने वाले सवाल",
+  };
+
+  const storyData = isEn ? storyEn : story;
+  const impactData = isEn ? impactEn : impact;
+  const turningPointData = isEn ? turningPointEn : turningPoint;
+  const journeyData = isEn ? journeyEn : journey;
+  const companiesData = isEn ? companiesEn : companies;
+  const voicesData = isEn ? voicesEn : voices;
+  const closingQuoteData = isEn ? closingQuoteEn : closingQuote;
+  const awardsData = isEn ? awardsEn : awards;
+  const faqsData = isEn ? faqsEn : faqs;
+
   return (
     <div id="top">
       <Navbar />
 
       {/* ───────────── Hero ───────────── */}
-      <section className="pt-16 sm:pt-20">
-        {/* Brand banner - same image at every screen size, no mobile switch. */}
-        <div className="mx-auto max-w-[1600px] px-0 sm:px-5">
-          <img
-            src="/img/founder-banner.jpg"
-            alt="Yogendra Mishra, Founder & MD, Direct Credit - हर मेहनती इंसान एक मौके का हकदार है"
-            className="w-full object-cover"
-          />
+      <section className="pt-24 sm:pt-28">
+        {/* Brand banner - auto-sliding between banner images, fixed to the original banner's aspect ratio. */}
+        <div className="relative mx-auto max-w-[1600px] overflow-hidden px-0 sm:px-5" style={{ aspectRatio: "3 / 1" }}>
+          {bannerSlides.map((src, i) => (
+            <img
+              key={src}
+              src={src}
+              alt="Yogendra Mishra, Founder & MD, Direct Credit - हर मेहनती इंसान एक मौके का हकदार है"
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                i === bannerIndex ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ))}
         </div>
 
         {/* Name plate - hero ke neeche ek ledger bar */}
@@ -83,14 +145,14 @@ export default function Founder() {
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
           <SectionHead
             eyebrow="2009 · Pratapgarh → Noida"
-            title="हर मेहनती इंसान को आगे बढ़ने का एक मौका मिलना चाहिए। "
+            title={t.storyTitle}
           />
 
           <div className="mt-12 grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
             <Reveal className="space-y-6">
-              {story.map((p, i) => (
+              {storyData.map((p, i) => (
                 <p key={i} className="text-[18px] leading-[1.85] text-ink/90">
-                  {p}
+                  {linkifyDirectCredit(p)}
                 </p>
               ))}
 
@@ -98,7 +160,7 @@ export default function Founder() {
                 href="/about#story"
                 className="inline-flex items-center gap-2 font-semibold text-blue hover:text-signal"
               >
-                मेरी पूरी कहानी पढ़िए <ArrowUpRight className="h-4 w-4" />
+                {t.readFullStory} <ArrowUpRight className="h-4 w-4" />
               </a>
             </Reveal>
 
@@ -118,7 +180,7 @@ export default function Founder() {
       <section className="py-10 sm:py-14" style={{ backgroundColor: "#2B7A76" }}>
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
           <div className="grid gap-10 text-center sm:grid-cols-3">
-            {impact.map((n, i) => (
+            {impactData.map((n, i) => (
               <Reveal key={n.unit} delay={i * 80} className="rounded-xl p-2 transition hover:-translate-y-1 hover:bg-white/10">
                 <p className="text-[clamp(2.4rem,5vw,3.4rem)] font-extrabold leading-none text-white">
                   {n.stat}
@@ -138,19 +200,19 @@ export default function Founder() {
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
           <SectionHead
             eyebrow="Credit Finserve → Direct Credit"
-            title={turningPoint.title}
+            title={turningPointData.title}
           />
           <div className="mt-10 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
             <Reveal className="space-y-6">
-              {turningPoint.paras.map((p, i) => (
+              {turningPointData.paras.map((p, i) => (
                 <p key={i} className="text-[17px] leading-[1.85] text-ink/75">
-                  {p}
+                  {linkifyDirectCredit(p)}
                 </p>
               ))}
             </Reveal>
             <Reveal delay={120} className="border-t-2 border-signal bg-white p-8">
               <p className="font-display text-[21px] font-medium leading-relaxed text-ink">
-                “{turningPoint.quote}”
+                “{linkifyDirectCredit(turningPointData.quote)}”
               </p>
               <p className="mt-5 font-mono text-[10px] uppercase tracking-[0.18em] text-ink/50">
                 - {founder.name}
@@ -166,7 +228,7 @@ export default function Founder() {
           <SectionHead
             eyebrow="The ledger"
             title="My Journey"
-            sub="हर entry एक कंपनी नहीं - एक सीख है।"
+            sub={t.journeySub}
           />
 
           <div className="relative mt-16">
@@ -174,7 +236,7 @@ export default function Founder() {
             <div className="absolute left-5 top-2 bottom-2 border-l-2 border-dashed border-signal/40 sm:left-1/2 sm:-translate-x-1/2" />
 
             <div className="space-y-12 sm:space-y-4">
-              {journey.map((j, i) => {
+              {journeyData.map((j, i) => {
                 const isRight = i % 2 === 0;
                 return (
                   <Reveal
@@ -226,7 +288,7 @@ export default function Founder() {
                             </span>
                           )}
                         </h3>
-                        <p className="mt-2 text-[15px] leading-relaxed text-ink/70">{j.text}</p>
+                        <p className="mt-2 text-[15px] leading-relaxed text-ink/70">{linkifyDirectCredit(j.text)}</p>
                       </div>
                     </div>
 
@@ -237,11 +299,11 @@ export default function Founder() {
             </div>
 
             {/* arrows on the spine, one per gap between years */}
-            {journey.slice(0, -1).map((j, i) => (
+            {journeyData.slice(0, -1).map((j, i) => (
               <div
                 key={`arrow-${j.year}`}
                 className="pointer-events-none absolute left-5 z-10 -translate-x-1/2 sm:left-1/2"
-                style={{ top: `calc(${((i + 1) / journey.length) * 100}% - 0.6rem)` }}
+                style={{ top: `calc(${((i + 1) / journeyData.length) * 100}% - 0.6rem)` }}
               >
                 <ArrowDown className="h-4 w-4 rounded-full bg-white text-signal" />
               </div>
@@ -255,13 +317,13 @@ export default function Founder() {
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
           <SectionHead
             eyebrow="Recognition"
-            title="मंच पर मिला भरोसा"
-            sub="Consistency, integrity और customers पर focus - इन्हीं का नतीजा। Photo par tap karke poori tasveer dekhein."
+            title={t.recognitionTitle}
+            sub={t.recognitionSub}
           />
-          <AwardsGallery />
+          <AwardsGallery awards={awardsData} />
           <div className="mt-10 flex justify-center">
-            <a href="/media" className="btn-ghost">
-              पूरा मीडिया देखें <ArrowUpRight className="h-3.5 w-3.5" />
+            <a href="/achievements" className="btn-ghost">
+              {t.seeAllMedia} <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
         </div>
@@ -272,12 +334,12 @@ export default function Founder() {
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
           <SectionHead
             eyebrow="Direct Credit Group"
-            title="जो कंपनियाँ बनीं"
-            sub="हर विचार को हकीकत में बदलने का सफ़र - ये सिर्फ business नहीं, समस्याओं के समाधान हैं।"
+            title={t.companiesTitle}
+            sub={t.companiesSub}
           />
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {companies.map((c, i) => {
+            {companiesData.map((c, i) => {
               const Icon = companyIcons[c.icon] || HandCoins;
               return (
                 <Reveal
@@ -345,14 +407,14 @@ export default function Founder() {
           </Reveal>
 
           <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {voices.map((v, i) => (
+            {voicesData.map((v, i) => (
               <Reveal
                 key={v.who}
                 delay={i * 80}
                 className="relative flex flex-col rounded-2xl border border-rule bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
               >
                 <Quote className="h-8 w-8 text-amber-500" fill="currentColor" strokeWidth={0} />
-                <p className="mt-4 flex-1 text-[17px] leading-relaxed text-ink">{v.quote}</p>
+                <p className="mt-4 flex-1 text-[17px] leading-relaxed text-ink">{linkifyDirectCredit(v.quote)}</p>
 
                 <div className="mt-6 flex items-center gap-3 border-t border-rule pt-5">
                   <div className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-amber-100 font-display text-[15px] font-bold text-amber-700">
@@ -387,8 +449,8 @@ export default function Founder() {
       {/* ───────────── FAQ ───────────── */}
       <section id="faq" className="py-10 sm:py-14">
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
-          <SectionHead eyebrow="FAQ" title="अक्सर पूछे जाने वाले सवाल" />
-          <Faq />
+          <SectionHead eyebrow="FAQ" title={t.faqTitle} />
+          <Faq items={faqsData} />
         </div>
       </section>
 
@@ -464,7 +526,7 @@ export default function Founder() {
       <section className="py-20 sm:py-24">
         <div className="mx-auto max-w-3xl px-5 text-center sm:px-8">
           <p className="font-display text-[clamp(1.4rem,3vw,2rem)] font-medium leading-[1.5] text-ink">
-            “{closingQuote}”
+            “{linkifyDirectCredit(closingQuoteData)}”
           </p>
           <div className="mx-auto mt-8 h-px w-16 bg-signal" />
           <img

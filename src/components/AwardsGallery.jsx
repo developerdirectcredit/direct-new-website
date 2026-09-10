@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
-import { awards } from "../data/content";
+import { awards as awardsHi } from "../data/content";
 import Reveal from "./Reveal";
 
-export default function AwardsGallery() {
+export default function AwardsGallery({ awards = awardsHi }) {
   const [index, setIndex] = useState(null);
   const open = index !== null;
 

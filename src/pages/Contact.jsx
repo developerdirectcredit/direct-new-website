@@ -14,10 +14,17 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import { founder, contact, connectPage } from "../data/content";
+import useLanguage from "../hooks/useLanguage";
 
 const featureIcons = { Send, ShieldCheck, Handshake, User };
 
 export default function Contact() {
+  const [lang] = useLanguage();
+  const isEn = lang === "en";
+  const features = isEn ? connectPage.featuresEn : connectPage.features;
+  const reasons = isEn ? connectPage.reasonsEn : connectPage.reasons;
+  const customSubjectPlaceholder = isEn ? "Type your subject" : "Apna subject likhein";
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -37,7 +44,7 @@ export default function Contact() {
       <Navbar />
 
       {/* ───────────── Hero (banner, same as home page) ───────────── */}
-      <section className="pt-16 sm:pt-20">
+      <section className="pt-24 sm:pt-28">
         {/* Brand banner - same image at every screen size, no mobile switch. */}
         <div className="mx-auto max-w-[1600px] px-0 sm:px-5">
           <img
@@ -84,7 +91,7 @@ export default function Contact() {
             {/* Left: feature cards + quick connect */}
             <div>
               <div className="grid gap-5 sm:grid-cols-2">
-                {connectPage.features.map((f, i) => {
+                {features.map((f, i) => {
                   const Icon = featureIcons[f.icon];
                   return (
                     <Reveal
@@ -162,7 +169,7 @@ export default function Contact() {
                       <option value="" disabled>
                         {connectPage.formLabels.subjectPlaceholder}
                       </option>
-                      {connectPage.reasons.map((r) => (
+                      {reasons.map((r) => (
                         <option key={r.key} value={r.title}>
                           {r.title} - {r.desc}
                         </option>
@@ -175,7 +182,7 @@ export default function Contact() {
                     <input
                       type="text"
                       required
-                      placeholder="Apna subject likhein"
+                      placeholder={customSubjectPlaceholder}
                       value={customSubject}
                       onChange={(e) => setCustomSubject(e.target.value)}
                       className="mt-2 w-full rounded-xl border border-rule px-3.5 py-3 text-[14.5px] text-ink outline-none placeholder:text-ink/35 focus:border-blue"

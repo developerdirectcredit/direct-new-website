@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
-import { faqs } from "../data/content";
+import { faqs as faqsHi } from "../data/content";
+import linkifyDirectCredit from "../utils/linkify";
 
-export default function Faq() {
+export default function Faq({ items = faqsHi }) {
   const [open, setOpen] = useState(0);
 
   return (
     <div className="mt-10 border-t border-rule">
-      {faqs.map((f, i) => {
+      {items.map((f, i) => {
         const isOpen = open === i;
         return (
           <div key={f.q} className="border-b border-rule">
@@ -27,7 +28,7 @@ export default function Faq() {
               }`}
             >
               <div className="overflow-hidden">
-                <p className="max-w-2xl text-[16px] leading-relaxed text-ink/70">{f.a}</p>
+                <p className="max-w-2xl text-[16px] leading-relaxed text-ink/70">{linkifyDirectCredit(f.a)}</p>
               </div>
             </div>
           </div>

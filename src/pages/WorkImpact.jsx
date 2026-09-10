@@ -26,7 +26,7 @@ export default function WorkImpact() {
       <Navbar />
 
       {/* ───────────── Hero (banner, same as home page) ───────────── */}
-      <section className="pt-16 sm:pt-20">
+      <section className="pt-24 sm:pt-28">
         {/* Brand banner - same image at every screen size, no mobile switch. */}
         <div className="mx-auto max-w-[1600px] px-0 sm:px-5">
           <a href="/contact" aria-label="Let's Connect - Contact page par jaayein">

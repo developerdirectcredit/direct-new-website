@@ -1,12 +1,12 @@
 import { ArrowRight } from "lucide-react";
 
 const links = [
+  { label: "Home", href: "/" },
   { label: "Vision & Philosophy", href: "/vision-philosophy" },
-  { label: "Insights", href: "/insights" },
-  { label: "Media", href: "/media" },
-  { label: "Speaking", href: "/speaking" },
+  { label: "Media & Speaking", href: "/media-speaking" },
+  { label: "CSR & Social Impact", href: "/csr" },
+  { label: "Achievements & Awards", href: "/achievements" },
   { label: "About", href: "/about" },
-  { label: "Connect", href: "/contact" },
 ];
 
 /* Har page ke neeche same nav CTA strip — dusre sections tak le jaane ke liye. */
