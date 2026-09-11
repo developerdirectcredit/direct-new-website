@@ -10,11 +10,10 @@ import {
   facebookVideos,
   facebookVideosEn,
   speakingVideos,
-  speakingFacebookVideos,
-  speakingFacebookVideosEn,
   newspaperFeatures,
   mediaInterviewReels,
   whatMediaSaysReels,
+  galleryExtraVideos,
 } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
 import useHashScroll from "../hooks/useHashScroll";
@@ -26,17 +25,14 @@ function FacebookCard({ v }) {
   return (
     <>
       {isFacebook ? (
-        <div
-          className="mx-auto w-full max-w-[338px] overflow-hidden rounded-2xl shadow-xl"
-          style={{ aspectRatio: "9 / 16" }}
-        >
+        <div className="relative h-[350px] w-full overflow-hidden rounded-2xl bg-ink shadow-xl">
           <iframe
-            src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(v.url)}&show_text=false&width=338&height=600`}
+            src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(v.url)}&show_text=false&width=350&height=350`}
             title={v.title}
             loading="lazy"
             scrolling="no"
             allow="autoplay; encrypted-media; picture-in-picture"
-            className="h-full w-full border-0"
+            className="absolute left-1/2 top-1/2 h-[145%] w-[145%] -translate-x-1/2 -translate-y-1/2 border-0"
           />
         </div>
       ) : (
@@ -90,8 +86,7 @@ export default function MediaSpeaking() {
   useHashScroll();
   const isEn = lang === "en";
   const mediaFbVideos = isEn ? facebookVideosEn : facebookVideos;
-  const speakingFbVideos = isEn ? speakingFacebookVideosEn : speakingFacebookVideos;
-  const galleryVideos = [...mediaFbVideos, ...speakingFbVideos];
+  const galleryVideos = [...mediaFbVideos, ...galleryExtraVideos];
 
   return (
     <div id="top">
@@ -109,40 +104,30 @@ export default function MediaSpeaking() {
         </div>
       </section>
 
-      <Reveal delay={80} className="mx-auto max-w-3xl px-5 py-5 text-center sm:px-8 sm:py-7">
-        <h1 className="text-[clamp(1.9rem,4.4vw,3.1rem)] font-bold leading-[1.15] text-signal">
-          {isEn ? "Media & Speaking" : "Media & Speaking"}
-        </h1>
-      </Reveal>
-
-      <div className="mx-auto mt-3 max-w-ledger px-5 sm:px-8">
+      <Reveal delay={80} className="mx-auto mt-1 max-w-ledger px-5 sm:px-8">
         <div className="ledger-rule" />
-        <div className="flex flex-col gap-4 py-5 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="font-display text-[clamp(1.6rem,3.4vw,2.3rem)] font-bold leading-tight text-ink">
-              {founder.name}
-            </h2>
-            <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/55">
-              {founder.role} · {founder.group}
-            </p>
-          </div>
-          <div className="flex gap-3">
+        <div className="grid grid-cols-1 items-center gap-2 py-3 sm:grid-cols-[1fr_auto_1fr]">
+          <span className="hidden sm:block" />
+          <h1 className="text-center text-[clamp(1.9rem,4.4vw,3.1rem)] font-bold leading-[1.15] text-signal">
+            {isEn ? "Media & Speaking" : "Media & Speaking"}
+          </h1>
+          <div className="flex justify-center gap-3 sm:justify-end">
             <a href="/contact" className="btn-solid">
               Connect <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
-            <a href="#speeches-interviews" className="btn-ghost">
-              Videos
+            <a href="/about#my-journey" className="btn-ghost">
+              Journey
             </a>
           </div>
         </div>
-      </div>
+      </Reveal>
 
       <span id="founders-note" className="-mt-24 block pt-24" />
       <span id="training-mentorship" className="-mt-24 block pt-24" />
       <span id="teachings-beliefs" className="-mt-24 block pt-24" />
 
       {/* ───────────── Speeches & Interviews ───────────── */}
-      <section id="speeches-interviews" className="scroll-mt-24 border-y border-rule bg-white py-20 sm:py-28">
+      <section id="speeches-interviews" className="scroll-mt-24 border-y border-rule bg-white py-10 sm:py-14">
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
           <SectionHead eyebrow="View Speaking Topics" title="Speeches & Interviews" />
 
@@ -168,7 +153,7 @@ export default function MediaSpeaking() {
       </section>
 
       {/* ───────────── Media Interviews & Video Features ───────────── */}
-      <section id="media-interviews-video-features" className="scroll-mt-24 border-b border-rule bg-paper py-20 sm:py-28">
+      <section id="media-interviews-video-features" className="scroll-mt-24 border-b border-rule bg-paper py-10 sm:py-14">
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
           <SectionHead eyebrow="Interviews" title="Media Interviews & Video Features" />
 
@@ -223,9 +208,9 @@ export default function MediaSpeaking() {
             </div>
           </div>
 
-          <div className="mt-10 grid gap-8 sm:grid-cols-2">
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {whatMediaSaysReels.map((v, i) => (
-              <Reveal key={v.url} delay={i * 90}>
+              <Reveal key={v.url} delay={i * 90} className={whatMediaSaysReels.length === 1 ? "sm:max-w-sm" : ""}>
                 <FacebookCard v={v} />
               </Reveal>
             ))}
@@ -265,7 +250,7 @@ export default function MediaSpeaking() {
           <SectionHead eyebrow="Gallery" title="Photo/Video Gallery" />
 
           <h3 className="mt-10 text-[18px] font-bold uppercase tracking-[0.08em] text-ink">Videos</h3>
-          <div className="mt-6 grid gap-8 md:grid-cols-2">
+          <div className="mt-6 grid items-start gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {galleryVideos.map((v, i) => (
               <Reveal key={v.url} delay={i * 90}>
                 <FacebookCard v={v} />
@@ -282,6 +267,7 @@ export default function MediaSpeaking() {
                 { src: "/img/dc%20inauguration%201.JPG", alt: "DC Inauguration" },
                 { src: "/img/DC%20Inauguration2.JPG", alt: "DC Inauguration" },
                 { src: "/img/DC%20Inauguration3.JPG", alt: "DC Inauguration" },
+                { src: "/img/Puja%20DC%20Inauguration.JPG", alt: "Puja DC Inauguration" },
               ],
             },
             {
@@ -290,6 +276,7 @@ export default function MediaSpeaking() {
                 { src: "/img/all%20team.JPG", alt: "Team" },
                 { src: "/img/formal.JPG", alt: "Formal" },
                 { src: "/img/team1.JPG", alt: "Team" },
+                { src: "/img/Teams%202.png", alt: "Team" },
               ],
             },
             {
@@ -300,6 +287,7 @@ export default function MediaSpeaking() {
                 { src: "/img/birthday.JPG", alt: "Birthday" },
                 { src: "/img/pooja.JPG", alt: "Pooja" },
                 { src: "/img/Utsav%20_%20Krishna%20Janmashtami.JPG", alt: "Krishna Janmashtami" },
+                { src: "/img/Utsav%20_%20Krishna%20Janmashtami%20(1).JPG", alt: "Krishna Janmashtami" },
               ],
             },
           ].map((group) => (

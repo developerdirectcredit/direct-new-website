@@ -5,7 +5,7 @@ const links = [
   { label: "Vision & Philosophy", href: "/vision-philosophy" },
   { label: "Media & Speaking", href: "/media-speaking" },
   { label: "CSR & Social Impact", href: "/csr" },
-  { label: "Achievements & Awards", href: "/achievements" },
+  { label: "Achievements & Awards", href: "/recognition-honours" },
   { label: "About", href: "/about" },
 ];
 

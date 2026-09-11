@@ -10,7 +10,6 @@ const aboutDropdown = [
   { href: "/about#my-journey", label: "Intro" },
   { href: "/about#family-journey", label: "Family & Personal Journey" },
   { href: "/about#education", label: "Education" },
-  { href: "/about#personality-values", label: "Personality, Values & Belief System" },
   { href: "/about#team-leadership", label: "Team & Leadership" },
   { href: "/about#sports-lifestyle", label: "Sports & Lifestyle" },
   { href: "/about#favourite-things", label: "Favourite Things & Interests" },
@@ -28,8 +27,6 @@ const csrDropdown = [
 const mediaSpeakingDropdown = [
   { href: "/media-speaking#speeches-interviews", label: "Speeches & Interviews" },
   { href: "/media-speaking#media-interviews-video-features", label: "Media Interviews & Video Features" },
-  { href: "/media-speaking#training-mentorship", label: "Training & Mentorship" },
-  { href: "/media-speaking#teachings-beliefs", label: "Teachings & Beliefs" },
   { href: "/media-speaking#what-media-says", label: "What Media Says " },
   { href: "/media-speaking#newspaper-magazine-features", label: "Newspaper/Magazine Features" },
   { href: "/media-speaking#photo-video-gallery", label: "Photo/Video Gallery" },
@@ -41,7 +38,7 @@ const links = [
   // { href: "/work-impact", label: "Work & Impact" },
   { href: "/media-speaking", label: "Media & Speaking", children: mediaSpeakingDropdown },
   { href: "/csr", label: "CSR & Social Impact", children: csrDropdown },
-  { href: "/achievements", label: "Achievements & Awards" },
+  { href: "/recognition-honours", label: "Recognition & Honours" },
   { href: "/about", label: "About", children: aboutDropdown },
   { href: "/contact", label: "Connect" },
 ];

@@ -20,7 +20,7 @@ export default function App() {
   if (path === "/work-impact") return <WorkImpact />;
   if (path === "/media-speaking" || path === "/media" || path === "/speaking") return <MediaSpeaking />;
   if (path === "/csr") return <Csr />;
-  if (path === "/achievements") return <Achievements />;
+  if (path === "/achievements" || path === "/recognition-honours") return <Achievements />;
   if (path === "/media/best-alternative-lending-award") return <BestAlternativeLendingAward />;
   if (path === "/media/leader-in-customized-lending-solutions") return <LeaderCustomizedLendingSolutions />;
   if (path === "/media/times-power-icon-award") return <TimesPowerIconAward />;

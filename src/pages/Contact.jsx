@@ -114,13 +114,13 @@ export default function Contact() {
             </div>
 
             {/* Right: form card */}
-            <Reveal delay={100} className="rounded-3xl border border-rule bg-white p-6 shadow-xl sm:p-8">
+            <Reveal delay={100} className="rounded-3xl border border-rule bg-white p-5 shadow-xl sm:p-6">
               <div className="text-center">
                 <h3 className="font-display text-[24px] font-extrabold text-ink">{connectPage.formLabels.heading}</h3>
                 <span className="mx-auto mt-2 block h-0.5 w-14" style={{ backgroundColor: "#D8A94E" }} />
               </div>
 
-              <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+              <form onSubmit={handleSubmit} className="mt-5 space-y-4">
                 <div className="grid gap-5 sm:grid-cols-2">
                   <label className="block">
                     <span className="text-[13.5px] font-semibold text-ink">
@@ -196,7 +196,7 @@ export default function Contact() {
                   </span>
                   <textarea
                     required
-                    rows={5}
+                    rows={3}
                     placeholder={connectPage.formLabels.messagePlaceholder}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}

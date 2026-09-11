@@ -66,7 +66,7 @@ export default function Founder() {
     readFullStory: isEn ? "Read my full story" : "मेरी पूरी कहानी पढ़िए",
     journeySub: isEn
       ? "Every entry isn't a company - it's a lesson."
-      : "हर entry एक कंपनी नहीं - एक सीख है।",
+      : "From Finance to Entrepreneurship",
     recognitionTitle: isEn ? "Trust, recognised on stage" : "मंच पर मिला भरोसा",
     recognitionSub: isEn
       ? "The result of consistency, integrity and a relentless focus on customers. Tap a photo to see it in full."
@@ -110,9 +110,9 @@ export default function Founder() {
         </div>
 
         {/* Name plate - hero ke neeche ek ledger bar */}
-        <div className="mx-auto mt-3 max-w-ledger px-5 sm:px-8">
+        <div className="mx-auto mt-1 max-w-ledger px-5 sm:px-8">
           <div className="ledger-rule" />
-          <div className="flex flex-col gap-4 py-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="flex flex-col gap-2 py-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <h1 className="font-display text-[clamp(1.6rem,3.4vw,2.3rem)] font-bold leading-tight text-ink">
                 {founder.name}
@@ -143,33 +143,36 @@ export default function Founder() {
       {/* ───────────── Story ───────────── */}
       <section id="story" className="pb-10 pt-10 sm:pb-14 sm:pt-14">
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
-          <SectionHead
-            eyebrow="2009 · Pratapgarh → Noida"
-            title={t.storyTitle}
-          />
+          <div className="grid items-stretch gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+            <Reveal className="flex flex-col">
+              <p className="eyebrow">2009 · Pratapgarh → Noida</p>
+              <div className="ledger-rule mt-3" />
+              <h2 className="mt-5 text-[clamp(1.9rem,4vw,2.9rem)] font-bold leading-[1.15]">
+                {t.storyTitle}
+              </h2>
 
-          <div className="mt-12 grid gap-12 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
-            <Reveal className="space-y-6">
-              {storyData.map((p, i) => (
-                <p key={i} className="text-[18px] leading-[1.85] text-ink/90">
-                  {linkifyDirectCredit(p)}
-                </p>
-              ))}
+              <div className="mt-6 space-y-6">
+                {storyData.map((p, i) => (
+                  <p key={i} className="text-[18px] leading-[1.85] text-ink/90">
+                    {linkifyDirectCredit(p)}
+                  </p>
+                ))}
+              </div>
 
               <a
                 href="/about#story"
-                className="inline-flex items-center gap-2 font-semibold text-blue hover:text-signal"
+                className="mt-6 inline-flex items-center gap-2 font-semibold text-blue hover:text-signal"
               >
                 {t.readFullStory} <ArrowUpRight className="h-4 w-4" />
               </a>
             </Reveal>
 
-            <Reveal delay={120} className="lg:sticky lg:top-28 lg:self-start">
+            <Reveal delay={120}>
               <img
                 src="/img/founder-desk.jpg"
                 alt="Yogendra Kumar Mishra, Direct Credit ke Noida office mein"
                 loading="lazy"
-                className="hidden w-full object-cover md:block"
+                className="hidden h-full w-full object-cover md:block"
               />
             </Reveal>
           </div>
@@ -177,18 +180,17 @@ export default function Founder() {
       </section>
 
       {/* ───────────── Impact stats ───────────── */}
-      <section className="py-10 sm:py-14" style={{ backgroundColor: "#2B7A76" }}>
+      <section className="py-6 sm:py-8" style={{ backgroundColor: "#2B7A76" }}>
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
-          <div className="grid gap-10 text-center sm:grid-cols-3">
+          <div className="grid gap-6 text-center sm:grid-cols-3">
             {impactData.map((n, i) => (
               <Reveal key={n.unit} delay={i * 80} className="rounded-xl p-2 transition hover:-translate-y-1 hover:bg-white/10">
-                <p className="text-[clamp(2.4rem,5vw,3.4rem)] font-extrabold leading-none text-white">
+                <p className="text-[clamp(2.2rem,4.4vw,3rem)] font-extrabold leading-none text-white">
                   {n.stat}
                 </p>
-                <p className="mt-2 text-[15px] font-semibold uppercase tracking-[0.12em] text-white/85">
+                <p className="mt-2 text-[14px] font-semibold uppercase tracking-[0.1em] text-white/85">
                   {n.unit}
                 </p>
-                <p className="mt-3 text-[14px] leading-relaxed text-white/70">{n.desc}</p>
               </Reveal>
             ))}
           </div>
@@ -288,7 +290,7 @@ export default function Founder() {
                             </span>
                           )}
                         </h3>
-                        <p className="mt-2 text-[15px] leading-relaxed text-ink/70">{linkifyDirectCredit(j.text)}</p>
+                        <p className="mt-2 whitespace-pre-line text-[15px] leading-relaxed text-ink/70">{linkifyDirectCredit(j.text)}</p>
                       </div>
                     </div>
 
@@ -322,7 +324,7 @@ export default function Founder() {
           />
           <AwardsGallery awards={awardsData} />
           <div className="mt-10 flex justify-center">
-            <a href="/achievements" className="btn-ghost">
+            <a href="/recognition-honours" className="btn-ghost">
               {t.seeAllMedia} <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>
@@ -394,7 +396,7 @@ export default function Founder() {
       </section>
 
       {/* ───────────── Voices ───────────── */}
-      <section className="border-y border-rule bg-[#FCF6EF] py-14 sm:py-20">
+      <section className="border-y border-rule bg-[#FCF6EF] py-8 sm:py-10">
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
           <Reveal>
             <p className="font-mono text-[12px] font-bold uppercase tracking-[0.2em] text-amber-600"> People's Voice</p>
@@ -438,7 +440,7 @@ export default function Founder() {
             ))}
           </div>
 
-          <div className="mx-auto mt-14 flex max-w-md items-center gap-4">
+          <div className="mx-auto mt-5 flex max-w-md items-center gap-4">
             <div className="h-px flex-1 bg-rule" />
             <Quote className="h-6 w-6 text-amber-300" fill="currentColor" strokeWidth={0} />
             <div className="h-px flex-1 bg-rule" />
@@ -447,78 +449,10 @@ export default function Founder() {
       </section>
 
       {/* ───────────── FAQ ───────────── */}
-      <section id="faq" className="py-10 sm:py-14">
+      <section id="faq" className="py-6 sm:py-8">
         <div className="mx-auto max-w-ledger px-5 sm:px-8">
           <SectionHead eyebrow="FAQ" title={t.faqTitle} />
           <Faq items={faqsData} />
-        </div>
-      </section>
-
-      {/* ───────────── CEO's Message ───────────── */}
-      <section className="relative overflow-hidden py-10 sm:py-14" style={{ backgroundColor: "#EDE1E6" }}>
-        <div className="mx-auto max-w-ledger px-5 sm:px-8">
-          <div className="grid items-start gap-10 sm:grid-cols-[auto_1fr] sm:gap-16">
-            <Reveal className="justify-self-center sm:pt-8 sm:justify-self-start">
-              <div
-                className="h-64 w-64 overflow-hidden rounded-full border-[6px] sm:h-80 sm:w-80 lg:h-[22rem] lg:w-[22rem]"
-                style={{ borderColor: "#0B1E33", backgroundColor: "#F2867D" }}
-              >
-                <img
-                  src="/img/IMG_0510.JPG"
-                  alt="Yogendra Kumar Mishra, CEO, Direct Credit"
-                  className="h-full w-full object-cover object-top"
-                />
-              </div>
-            </Reveal>
-
-            <Reveal delay={100} className="sm:pt-16">
-              <div className="relative mb-4 h-14 w-20">
-                <svg viewBox="0 0 90 70" className="absolute -left-2 top-0 h-16 w-24 text-ink/40">
-                  <polygon points="0,0 90,20 20,70" fill="none" stroke="currentColor" strokeWidth="1.5" />
-                </svg>
-                <svg viewBox="0 0 60 60" className="absolute left-4 top-6 h-9 w-9 text-signal">
-                  <polygon points="0,0 55,28 0,56" fill="currentColor" />
-                </svg>
-              </div>
-              <h2 className="font-display text-[clamp(2.6rem,6vw,4.2rem)] font-extrabold uppercase leading-[0.92] text-signal">
-                CEO&rsquo;s
-                <br />
-                Message
-              </h2>
-            </Reveal>
-          </div>
-
-          <Reveal delay={150} className="mt-12 max-w-3xl">
-            <p className="font-display text-[22px] font-bold italic text-ink">
-              Dear Valued Clients and Partners,
-            </p>
-            <p className="mt-6 text-[17px] leading-[1.9] text-blue">
-              At Direct Credit, our vision has always extended beyond lending - it is about{" "}
-              <strong className="font-bold">
-                empowering individuals, entrepreneurs, families and MSMEs
-              </strong>{" "}
-              (whose contribution to nation&rsquo;s GDP is ~30%) with the tools they need to{" "}
-              <strong className="font-bold">grow, sustain,</strong> and{" "}
-              <strong className="font-bold">thrive.</strong>
-            </p>
-            <p className="mt-6 text-[17px] leading-[1.9] text-blue">
-              We understand that every household has a unique financial journey - from the need
-              for timely funding to launching or scaling a business, and even accessing
-              government-backed schemes and subsidies. That&rsquo;s why we, along with our group
-              companies, have built a powerful ecosystem designed to cater to these diverse needs
-              with <strong className="font-bold">clarity, speed,</strong> and{" "}
-              <strong className="font-bold">integrity.</strong>
-            </p>
-          </Reveal>
-
-          <div className="relative mt-16 h-16 w-24">
-            <svg viewBox="0 0 90 70" className="absolute left-0 top-0 h-16 w-24 text-ink/40">
-              <polygon points="90,0 0,20 70,70" fill="none" stroke="currentColor" strokeWidth="1.5" />
-            </svg>
-            <svg viewBox="0 0 60 60" className="absolute left-6 top-6 h-9 w-9 text-signal">
-              <polygon points="60,0 5,28 60,56" fill="currentColor" />
-            </svg>
-          </div>
         </div>
       </section>
 

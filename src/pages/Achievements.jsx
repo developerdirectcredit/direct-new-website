@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Calendar, ArrowRight, Play } from "lucide-react";
+import { Calendar, ArrowRight, Play, ArrowUpRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
@@ -32,7 +32,7 @@ function ReelCard({ r }) {
           className="group relative block h-full w-full"
         >
           <img
-            src={`https://i.ytimg.com/vi/${r.youtubeId}/hqdefault.jpg`}
+            src={r.thumbnail || `https://i.ytimg.com/vi/${r.youtubeId}/hqdefault.jpg`}
             alt={r.title}
             loading="lazy"
             className="h-full w-full object-cover"
@@ -79,16 +79,28 @@ export default function Achievements() {
         </div>
       </section>
 
-      <Reveal delay={80} className="mx-auto max-w-3xl px-5 py-5 text-center sm:px-8 sm:py-7">
-        <h1 className="text-[clamp(1.9rem,4.4vw,3.1rem)] font-bold leading-[1.15] text-signal">
-          {isEn ? "Achievements & Awards" : "उपलब्धियाँ और सम्मान"}
-        </h1>
+      <Reveal delay={80} className="mx-auto mt-1 max-w-ledger px-5 sm:px-8">
+        <div className="ledger-rule" />
+        <div className="grid grid-cols-1 items-center gap-2 py-3 sm:grid-cols-[1fr_auto_1fr]">
+          <span className="hidden sm:block" />
+          <h1 className="text-center text-[clamp(1.9rem,4.4vw,3.1rem)] font-bold leading-[1.15] text-signal">
+            {isEn ? "Achievements & Awards" : "Recognition & Honours"}
+          </h1>
+          <div className="flex justify-center gap-3 sm:justify-end">
+            <a href="/contact" className="btn-solid">
+              Connect <ArrowUpRight className="h-3.5 w-3.5" />
+            </a>
+            <a href="/about#my-journey" className="btn-ghost">
+              Journey
+            </a>
+          </div>
+        </div>
       </Reveal>
 
       {/* ───────────── Awards ───────────── */}
       <section id="power-icon-awards" className="scroll-mt-24">
         <div className="mx-auto max-w-ledger px-5 pb-16 sm:px-8 sm:pb-20">
-          <SectionHead eyebrow="Recognition" title={isEn ? "Awards" : "पुरस्कार"} />
+          <SectionHead eyebrow="Recognition" title={isEn ? "Awards" : "Awards"} />
 
           <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {page.highlights.map((h, i) => {
