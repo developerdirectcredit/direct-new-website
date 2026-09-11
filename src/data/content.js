@@ -132,7 +132,8 @@ export const aboutPage = {
           "मैं जिस मिट्टी से आता हूँ प्रतापगढ़, उत्तर प्रदेश वहीं से मेरी कहानी की असली जड़ें जुड़ी हैं।",
           "बचपन की वे सादगी भरी सुबहें, अपनों का स्नेह, बड़ों के संस्कार और छोटी-छोटी खुशियों में बड़ी खुशी ढूँढ़ लेना आज भी मेरे भीतर कहीं जीवित है।",
           "उस मिट्टी ने एक बात बहुत पहले सिखा दी थी जिंदगी में कुछ भी आसानी से नहीं मिलता; हर चीज़ के पीछे मेहनत, धैर्य और सच्ची नीयत होती है।",
-          "शायद इसलिए आज किसी client की परेशानी सुनता हूँ, किसी नए व्यक्ति को अवसर देता हूँ या कोई बड़ा निर्णय लेता हूँ, तो मेरे भीतर वही बचपन कहीं न कहीं मौजूद रहता है।",
+          "शायद इसलिए आज किसी की परेशानी सुनता हूँ, किसी नए व्यक्ति को अवसर देता हूँ या कोई बड़ा निर्णय लेता हूँ, तो मेरे भीतर वही बचपन कहीं न कहीं मौजूद रहता है",
+
         ],
         groups: [
           {
@@ -306,7 +307,7 @@ export const aboutPage = {
             ],
           },
           "लेकिन सबसे महत्वपूर्ण बात इन सबने मिलकर मुझे मेरा उद्देश्य दिया।",
-          "आज भी जब कोई व्यक्ति अपनी समस्या लेकर सामने आता है, तो मैं उसमें सिर्फ एक client नहीं देखना चाहता।",
+          "आज भी जब कोई व्यक्ति अपनी समस्या लेकर सामने आता है, तो मैं उसे सिर्फ एक व्यक्ति नहीं, बल्कि अपनों की तरह समझना और उसकी जरूरतों के साथ खड़ा होना चाहता हूँ।",
           { quote: "मैं उसमें एक सपना देखता हूँ। एक परिवार की उम्मीद देखता हूँ। एक मेहनत करने वाले इंसान की कहानी देखता हूँ। और कहीं न कहीं अपने उस पुराने स्वरूप की झलक देखता हूँ जो कभी एक अवसर की तलाश में था।" },
           "शायद इसी वजह से मेरी कोशिश सिर्फ business करने की नहीं रही।",
           "मेरी कोशिश है कि जहाँ मेरी क्षमता काम आ सके, वहाँ किसी की उम्मीद को अवसर मिले, किसी की मेहनत को सही दिशा मिले और किसी के सपने को आगे बढ़ने का रास्ता मिले।",
@@ -1080,7 +1081,8 @@ export const companies = [
     legal: "Direct Realtors Pvt. Ltd.",
     since: "2023",
     category: "Real Estate Advisory",
-    desc: "हर भारतीय के बेहतर भविष्य को साकार करने का सपना",
+    desc: "Real Estate में सही Guidance और Support — भरोसेमंद Property Decisions के लिए। जल्द ही आपकी सेवा में एक नई और भरोसेमंद Real Estate Company",
+
     logo: "/logo/direct-realtors.jpg",
     theme: { iconBg: "bg-violet-500", badgeBg: "bg-violet-50", badgeText: "text-violet-600", buttonBg: "bg-violet-50", buttonText: "text-violet-700", border: "border-violet-100" },
   },
@@ -1098,7 +1100,7 @@ export const companies = [
     legal: "Ayurvedic wellness",
     since: "New",
     category: "Wellness",
-    desc: "भारत के प्राकृतिक और पारंपरिक खाद्य पदार्थों को आधुनिक Food Processing के साथ हर घर तक पहुँचाने का प्रयास",
+    desc: "भारत के प्राकृतिक और पारंपरिक खाद्य पदार्थों को आधुनिक Food Processing के साथ हर घर तक पहुँचाने का प्रयास। जल्द ही एक नई और भरोसेमंद Food Processing Company के रूप में आपकी सेवा में",
     logo: "/logo/trus%20me.jpeg",
     theme: { iconBg: "bg-lime-600", badgeBg: "bg-lime-50", badgeText: "text-lime-700", buttonBg: "bg-lime-50", buttonText: "text-lime-700", border: "border-lime-100" },
   },
@@ -1225,20 +1227,24 @@ export const contact = {
   site: "www.yogendramishra.in",
   offices: [
     {
-      label: "Head Office",
+      label: "Corporate Office",
       address: "Vision Business Park, 2nd Floor, Tower A, I.T Square, Knowledge Park - 3, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh - 201306",
     },
     {
-      label: "Lucknow Office",
+      label: "Lucknow Office  (Uttar Pradesh)",
       address: "Office No. 6, 8th Floor, BBD Viraj Tower, Vibhuti Khand, Gomti Nagar, Lucknow - 226010",
     },
     {
-      label: "Pratapgarh Office",
+      label: "Pratapgarh Office  (Uttar Pradesh)",
       address: "Jai Maa Rameshwaram Market, first floor, 14-15, Next to SBI Bank Babaganj, Pratapgarh, Uttar Pradesh - 230001",
     },
     {
-      label: "Prayagraj Office",
+      label: "Prayagraj Office  (Uttar Pradesh)",
       address: "2nd Floor, Premises No. 40A/1, Lowdher Road, George Town, Prayagraj, Uttar Pradesh - 211002",
+    },
+     {
+      label: "Varanasi Office  (Uttar Pradesh)",
+      address: " C-27/274-a-2,Maldahiya Rd, Chetganj , Varanasi, Uttar Pradesh - 221002",
     },
   ],
 };
@@ -1626,10 +1632,6 @@ export const csrPage = {
             "शिखर न्यूज़ नेटवर्क के कवरेज के दौरान सुर्खियों में आया प्रतापगढ़ का एक गरीब परिवार, संतोष मिश्रा नाम का। डायरेक्ट क्रेडिट ग्रुप ऑफ कंपनीज़ के सीईओ श्री योगेंद्र मिश्रा जी ने इस परिवार के सभी बच्चों के लिए कपड़े और राशन सामग्री बिना देर किए शिखर न्यूज़ नेटवर्क के माध्यम से भिजवाई।",
           ],
         },
-        {
-          video: { url: "https://www.facebook.com/reel/4509598062646503", title: "Essential Goods Distribution" },
-          paras: [],
-        },
       ],
     },
     {
@@ -1812,10 +1814,6 @@ export const csrPageEn = {
             { bold: "Direct Credit Group Provides Direct Help to the Poor" },
             "During Shikhar News Network's coverage, a poor family from Pratapgarh named Santosh Mishra came into the spotlight. Direct Credit Group of Companies' CEO Mr. Yogendra Mishra, without any delay, sent clothes and ration supplies for all the children of this family through Shikhar News Network.",
           ],
-        },
-        {
-          video: { url: "https://www.facebook.com/reel/4509598062646503", title: "Essential Goods Distribution" },
-          paras: [],
         },
       ],
     },
@@ -2134,7 +2132,7 @@ export const visionPage = {
       ],
     },
     {
-      heading: "Direct Realtors सपनों को जगह देने की कोशिश",
+      heading: "Direct Realtors Pvt. Ltd सपनों को जगह देने की कोशिश",
       image: "/logo/direct-realtors.jpg",
       noCollapse: true,
       paras: [
@@ -2146,7 +2144,7 @@ export const visionPage = {
       ],
     },
     {
-      heading: "YSS Elec Home जरूरत से Experience तक",
+      heading: "YSS Elec Home Pvt. Ltd. जरूरत से Experience तक",
       image: "/logo/elec-home.png",
       imageLink: "https://elechome.in/",
       previewCount: 3,
@@ -2161,7 +2159,7 @@ export const visionPage = {
       ],
     },
     {
-      heading: "YSS Digital Works Technology में इंसान सबसे पहले",
+      heading: "YSS Digital Works Pvt. Ltd. में इंसान सबसे पहले",
       image: "/logo/digital-works.png",
       imageLink: "https://digitalworkssolution.com/",
       previewCount: 3,
