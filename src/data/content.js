@@ -1666,14 +1666,13 @@ export const csrPage = {
         },
         {
           video: { url: "https://www.facebook.com/reel/1004198172568401", title: "Self Employment & Livelihood Support"},
-          paras: [],
+          paras: [{bold:"आज DC Foundation और मेरी तरफ से Shikhar News Network को एक कार भेंट की गई"}],
         },
         {
           video: { url: "https://www.facebook.com/reel/2089564145287089", title: "Self Employment & Livelihood Support"},
           previewCount: 1,
-          paras: [
-            // "आज DC Foundation और मेरी तरफ से Shikhar News Network को एक कार भेंट की गई, ताकि वे अपने कार्य को और बेहतर तरीके से कर सकें और ज्यादा से ज्यादा लोगों तक पहुँचकर उनकी मदद कर पाएं।",
-            // "मेरा हमेशा यही प्रयास रहेगा कि ज्यादा से ज्यादा लोगों की मदद हो सके और समाज के लिए बेहतर काम किए जा सकें।",
+          paras: [{ bold:"एक जिंदगी फिर आई पटरी पर — डायरेक्ट क्रेडिट ग्रुप की मदद से बंद पड़ा रोजगार फिर से शुरू हुआ।"}
+            
           ],
         },
         {
@@ -1682,15 +1681,23 @@ export const csrPage = {
         },
         {
           video: { url: "https://www.facebook.com/reel/1040746418935803", title: "Self Employment & Livelihood Support" },
-          paras: [],
+          paras: [{ bold: "'Direct Credit ग्रुप सें मिला रोजगार के लिए डायरेक्ट फायदा'" }],
         },
         {
           video: { url: "https://www.facebook.com/reel/2097252154202392", title: "Self Employment & Livelihood Support" },
-          paras: [],
+          paras: [{ bold: "' पति को कैंसर, घर चलाना हुआ मुश्किल 💔 Direct Credit ग्रुप  जी ने दिलाई सिलाई मशीन '" }],
         },
         {
           video: { url: "https://www.facebook.com/reel/2134454640824613", title: "Self Employment & Livelihood Support" },
-          paras: [],
+          paras: [{ bold: "' 6 महीने से बंद पड़ी दुकान आज Direct Credit  ग्रुप की आर्थिक मदद से फिर से खुल गई।'" }],
+        },
+        {
+          video: { url: "https://www.facebook.com/100064045692528/videos/%E0%A4%8F%E0%A4%95-%E0%A4%B0%E0%A5%8B%E0%A4%9C%E0%A4%97%E0%A4%BE%E0%A4%B0-%E0%A4%A6%E0%A5%87%E0%A4%95%E0%A4%B0-%E0%A4%9A%E0%A4%BE%E0%A4%B0-%E0%A4%B2%E0%A5%8B%E0%A4%97%E0%A5%8B-%E0%A4%95%E0%A5%87-%E0%A4%AA%E0%A5%87%E0%A4%9F-%E0%A4%95%E0%A5%8B-%E0%A4%AD%E0%A5%8B%E0%A4%9C%E0%A4%A8-%E0%A4%A6%E0%A4%BF%E0%A4%AF%E0%A4%BE-%E0%A4%B5%E0%A4%BE%E0%A4%B9-%E0%A4%B0%E0%A5%87-%E0%A4%A1%E0%A4%BE%E0%A4%AF%E0%A4%B0%E0%A5%87%E0%A4%95%E0%A5%8D%E0%A4%9F-%E0%A4%95%E0%A5%8D%E0%A4%B0%E0%A5%87%E0%A4%A1%E0%A4%BF%E0%A4%9F-%E0%A4%97%E0%A5%8D%E0%A4%B0%E0%A5%81%E0%A4%AA-%E0%A4%95%E0%A4%B9%E0%A4%BE%E0%A4%82-%E0%A4%B0/1433354568688839/", title: "Self Employment & Livelihood Support" },
+          paras: [{ bold: "एक रोजगार देकर चार लोगों के पीछे की जिंदगी को भौजन दिया। "}],
+        },
+         {
+          video: { url: "https://www.facebook.com/100064045692528/videos/direct-credit-group-%E0%A4%B8%E0%A4%82%E0%A4%A4%E0%A5%8B%E0%A4%B7-%E0%A4%B5%E0%A4%B0%E0%A5%8D%E0%A4%AE%E0%A4%BE-%E0%A4%95%E0%A5%8B-%E0%A4%B0%E0%A5%8B%E0%A4%9C%E0%A4%97%E0%A4%BE%E0%A4%B0-%E0%A4%A6%E0%A5%87%E0%A4%95%E0%A4%B0-%E0%A4%89%E0%A4%B8%E0%A4%95%E0%A5%87-%E0%A4%AA%E0%A5%80%E0%A4%9B%E0%A5%87-%E0%A4%AA%E0%A4%BE%E0%A4%82%E0%A4%9A-%E0%A4%B2%E0%A5%8B%E0%A4%97%E0%A5%8B-%E0%A4%95%E0%A5%80-%E0%A4%AD%E0%A5%80-%E0%A4%9C%E0%A4%BF%E0%A4%82%E0%A4%A6%E0%A4%97%E0%A5%80-/2084638185747858/", title: "Self Employment & Livelihood Support" },
+          paras: [{ bold: " Direct Credit ग्रुप  संतोष वर्मा को रोजगार देकर उसके पीछे पांच लोगो की भी जिंदगी सुधारी'" }],
         },
       ],
     },
@@ -1710,6 +1717,7 @@ export const csrPage = {
           video: { url: "https://www.facebook.com/reel/1376306218023854", title: "Smart Class Initiative (800 students)" },
           paras: [],
         },
+        
       ],
     },
     {
