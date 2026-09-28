@@ -1,6 +1,7 @@
 import { ArrowUpRight, Play, ExternalLink } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SectionNav from "../components/SectionNav";
 import Reveal from "../components/Reveal";
 import SectionHead from "../components/SectionHead";
 import PageNavCta from "../components/PageNavCta";
@@ -16,7 +17,10 @@ import {
   galleryExtraVideos,
 } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
+import usePageTitle from "../hooks/usePageTitle";
 import useHashScroll from "../hooks/useHashScroll";
+import useMediaItems from "../hooks/useMediaItems";
+import MediaEmbedCard from "../components/MediaEmbedCard";
 import linkifyDirectCredit from "../utils/linkify";
 
 function FacebookCard({ v }) {
@@ -81,12 +85,78 @@ function FacebookCard({ v }) {
   );
 }
 
+const STATIC_PHOTO_GROUPS = [
+  {
+    title: "DC Inauguration",
+    photos: [
+      { src: "/img/dc%20inauguration%201.JPG", alt: "DC Inauguration" },
+      { src: "/img/DC%20Inauguration2.JPG", alt: "DC Inauguration" },
+      { src: "/img/DC%20Inauguration3.JPG", alt: "DC Inauguration" },
+      { src: "/img/Puja%20DC%20Inauguration.JPG", alt: "Puja DC Inauguration" },
+    ],
+  },
+  {
+    title: "Teams",
+    photos: [
+      { src: "/img/all%20team.JPG", alt: "Team" },
+      { src: "/img/formal.JPG", alt: "Formal" },
+      { src: "/img/team1.JPG", alt: "Team" },
+      { src: "/img/Teams%202.png", alt: "Team" },
+    ],
+  },
+  {
+    title: "Utsav",
+    photos: [
+      { src: "/img/Utsav.jpeg", alt: "Utsav" },
+      { src: "/img/Celebrations.jpg", alt: "Celebrations" },
+      { src: "/img/birthday.JPG", alt: "Birthday" },
+      { src: "/img/pooja.JPG", alt: "Pooja" },
+      { src: "/img/Utsav%20_%20Krishna%20Janmashtami.JPG", alt: "Krishna Janmashtami" },
+      { src: "/img/Utsav%20_%20Krishna%20Janmashtami%20(1).JPG", alt: "Krishna Janmashtami" },
+    ],
+  },
+];
+
+function buildPhotoGroups(photoItems) {
+  const groups = STATIC_PHOTO_GROUPS.map((g) => ({ title: g.title, photos: [...g.photos] }));
+
+  photoItems.forEach((item) => {
+    const groupName = (item.group || "").trim() || "More Photos";
+    let target = groups.find((g) => g.title.toLowerCase() === groupName.toLowerCase());
+    if (!target) {
+      target = { title: groupName, photos: [] };
+      groups.push(target);
+    }
+    target.photos.push({ src: item.url, alt: item.title, key: item._id });
+  });
+
+  return groups;
+}
+
+const mediaNav = [
+  ["speeches-interviews", "Speeches & Interviews"],
+  ["media-interviews-video-features", "Media Interviews & Video Features"],
+  ["what-media-says", "What Media Says"],
+  ["newspaper-magazine-features", "Newspaper & Magazine Features"],
+  ["photo-video-gallery", "Photo & Video Gallery"],
+];
+
 export default function MediaSpeaking() {
   const [lang] = useLanguage();
+  usePageTitle("Media and Speaking | Yogendra Mishra, Direct Credit Group");
   useHashScroll();
   const isEn = lang === "en";
   const mediaFbVideos = isEn ? facebookVideosEn : facebookVideos;
   const galleryVideos = [...mediaFbVideos, ...galleryExtraVideos];
+
+  const speechesItems = useMediaItems("speeches-interviews", lang);
+  const interviewsItems = useMediaItems("media-interviews-video-features", lang);
+  const whatMediaSaysItems = useMediaItems("what-media-says", lang);
+  const newspaperItems = useMediaItems("newspaper-magazine-features", lang);
+  const galleryItems = useMediaItems("photo-video-gallery", lang);
+  const galleryVideoItems = galleryItems.filter((item) => item.platform !== "photo");
+  const galleryPhotoItems = galleryItems.filter((item) => item.platform === "photo");
+  const photoGroups = buildPhotoGroups(galleryPhotoItems);
 
   return (
     <div id="top">
@@ -122,7 +192,9 @@ export default function MediaSpeaking() {
         </div>
       </Reveal>
 
-      <span id="founders-note" className="-mt-24 block pt-24" />
+      <SectionNav items={mediaNav} />
+
+      <span id="founders-note"className="-mt-24 block pt-24" />
       <span id="training-mentorship" className="-mt-24 block pt-24" />
       <span id="teachings-beliefs" className="-mt-24 block pt-24" />
 
@@ -146,6 +218,12 @@ export default function MediaSpeaking() {
                 </div>
                 <p className="mt-3 text-[15px] font-semibold text-ink/80">{v.title}</p>
                 {v.desc && <p className="mt-1 text-[14px] leading-relaxed text-ink/60">{linkifyDirectCredit(v.desc)}</p>}
+              </Reveal>
+            ))}
+
+            {speechesItems.map((item, i) => (
+              <Reveal key={item._id} delay={(speakingVideos.length + i) * 90}>
+                <MediaEmbedCard item={item} />
               </Reveal>
             ))}
           </div>
@@ -192,6 +270,12 @@ export default function MediaSpeaking() {
                 <FacebookCard v={v} />
               </Reveal>
             ))}
+
+            {interviewsItems.map((item, i) => (
+              <Reveal key={item._id} delay={i * 90}>
+                <MediaEmbedCard item={item} />
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
@@ -212,6 +296,12 @@ export default function MediaSpeaking() {
             {whatMediaSaysReels.map((v, i) => (
               <Reveal key={v.url} delay={i * 90} className={whatMediaSaysReels.length === 1 ? "sm:max-w-sm" : ""}>
                 <FacebookCard v={v} />
+              </Reveal>
+            ))}
+
+            {whatMediaSaysItems.map((item, i) => (
+              <Reveal key={item._id} delay={i * 90}>
+                <MediaEmbedCard item={item} />
               </Reveal>
             ))}
           </div>
@@ -240,6 +330,24 @@ export default function MediaSpeaking() {
                 </span>
               </a>
             ))}
+
+            {newspaperItems.map((item) => (
+              <a
+                key={item._id}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col gap-3 rounded-2xl border border-rule bg-paper p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+              >
+                {item.event && (
+                  <span className="font-mono text-[11px] font-bold uppercase tracking-wide text-signal">{item.event}</span>
+                )}
+                <h3 className="text-[17px] font-bold leading-snug text-ink">{item.title}</h3>
+                <span className="mt-2 inline-flex w-fit items-center gap-1.5 text-[13px] font-bold text-blue">
+                  Read Article <ExternalLink className="h-3.5 w-3.5" />
+                </span>
+              </a>
+            ))}
           </div>
         </div>
       </section>
@@ -256,41 +364,17 @@ export default function MediaSpeaking() {
                 <FacebookCard v={v} />
               </Reveal>
             ))}
+
+            {galleryVideoItems.map((item, i) => (
+              <Reveal key={item._id} delay={i * 90}>
+                <MediaEmbedCard item={item} />
+              </Reveal>
+            ))}
           </div>
 
           <h3 className="mt-14 text-[18px] font-bold uppercase tracking-[0.08em] text-ink">Photo Gallery</h3>
 
-          {[
-            {
-              title: "DC Inauguration",
-              photos: [
-                { src: "/img/dc%20inauguration%201.JPG", alt: "DC Inauguration" },
-                { src: "/img/DC%20Inauguration2.JPG", alt: "DC Inauguration" },
-                { src: "/img/DC%20Inauguration3.JPG", alt: "DC Inauguration" },
-                { src: "/img/Puja%20DC%20Inauguration.JPG", alt: "Puja DC Inauguration" },
-              ],
-            },
-            {
-              title: "Teams",
-              photos: [
-                { src: "/img/all%20team.JPG", alt: "Team" },
-                { src: "/img/formal.JPG", alt: "Formal" },
-                { src: "/img/team1.JPG", alt: "Team" },
-                { src: "/img/Teams%202.png", alt: "Team" },
-              ],
-            },
-            {
-              title: "Utsav",
-              photos: [
-                { src: "/img/Utsav.jpeg", alt: "Utsav" },
-                { src: "/img/Celebrations.jpg", alt: "Celebrations" },
-                { src: "/img/birthday.JPG", alt: "Birthday" },
-                { src: "/img/pooja.JPG", alt: "Pooja" },
-                { src: "/img/Utsav%20_%20Krishna%20Janmashtami.JPG", alt: "Krishna Janmashtami" },
-                { src: "/img/Utsav%20_%20Krishna%20Janmashtami%20(1).JPG", alt: "Krishna Janmashtami" },
-              ],
-            },
-          ].map((group) => (
+          {photoGroups.map((group) => (
             <div key={group.title} className="mt-8">
               <h4 className="text-[14px] font-semibold uppercase tracking-[0.06em] text-ink/60">
                 {group.title}
@@ -298,7 +382,7 @@ export default function MediaSpeaking() {
               {group.photos.length > 0 ? (
                 <div className="mt-4 grid gap-8 md:grid-cols-2">
                   {group.photos.map((p, i) => (
-                    <Reveal key={p.src} delay={i * 90}>
+                    <Reveal key={p.key || p.src} delay={i * 90}>
                       <div className="h-[420px] w-full overflow-hidden rounded-2xl shadow-xl">
                         <img
                           src={p.src}

@@ -41,6 +41,7 @@ import {
   faqsEn,
 } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
+import usePageTitle from "../hooks/usePageTitle";
 import linkifyDirectCredit from "../utils/linkify";
 
 const companyIcons = { Building2, Leaf, HandCoins, Cpu };
@@ -49,6 +50,7 @@ const bannerSlides = ["/img/dcbanner%20(1).png", "/img/founder-banner.jpg"];
 
 export default function Founder() {
   const [lang] = useLanguage();
+  usePageTitle("Yogendra Mishra | Founder and MD, Direct Credit Group");
   const isEn = lang === "en";
   const [bannerIndex, setBannerIndex] = useState(0);
 

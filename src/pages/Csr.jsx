@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Play, ExternalLink, ChevronDown, ArrowUpRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import SectionNav from "../components/SectionNav";
 import Reveal from "../components/Reveal";
 import SectionHead from "../components/SectionHead";
 import PageNavCta from "../components/PageNavCta";
 import { founder, csrPage, csrPageEn } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
+import usePageTitle from "../hooks/usePageTitle";
 import useHashScroll from "../hooks/useHashScroll";
+import useMediaItems from "../hooks/useMediaItems";
 import linkifyDirectCredit from "../utils/linkify";
 
 const landscapeVideoSections = [
@@ -197,8 +200,15 @@ function StoryCard({ story, landscape }) {
   );
 }
 
-function CsrSection({ s, i }) {
-  if (s.stories && s.stories.length > 0) {
+function CsrSection({ s, i, lang }) {
+  const dynamicItems = useMediaItems(s.id, lang);
+  const dynamicStories = dynamicItems.map((item) => ({
+    video: { url: item.url, title: item.title },
+    paras: item.description ? [item.description] : [],
+  }));
+  const stories = [...(s.stories || []), ...dynamicStories];
+
+  if (stories.length > 0) {
     const landscape = landscapeVideoSections.includes(s.id);
     return (
       <Reveal
@@ -209,14 +219,14 @@ function CsrSection({ s, i }) {
         <SectionHead eyebrow="CSR & Social Impact" title={s.heading} />
         <div
           className={`mt-6 grid items-stretch gap-10 ${
-            s.stories.length === 1
+            stories.length === 1
               ? "max-w-3xl"
-              : s.stories.length === 2 || wideGridSections.includes(s.id)
+              : stories.length === 2 || wideGridSections.includes(s.id)
               ? "lg:grid-cols-2"
               : "lg:grid-cols-3"
           }`}
         >
-          {s.stories.map((story, k) => (
+          {stories.map((story, k) => (
             <StoryCard key={k} story={story} landscape={landscape} />
           ))}
         </div>
@@ -262,8 +272,18 @@ function CsrSection({ s, i }) {
   );
 }
 
+const csrNav = [
+  ["essential-goods-distribution", "Essential Goods Distribution"],
+  ["supporting-families-in-difficult-times", "Supporting Families in Difficult Times"],
+  ["entrepreneurship-livelihood-support", "Entrepreneurship & Livelihood Support"],
+  ["smart-class-initiative", "Smart Class Initiative"],
+  ["skill-development-empowerment", "Skill Development & Empowerment"],
+  ["beneficiary-stories", "Beneficiary Stories"],
+];
+
 export default function Csr() {
   const [lang] = useLanguage();
+  usePageTitle("CSR and Social Impact | Direct Credit Group, Yogendra Mishra");
   useHashScroll();
   const page = lang === "en" ? csrPageEn : csrPage;
 
@@ -302,11 +322,13 @@ export default function Csr() {
         <p className="mx-auto mt-3 max-w-3xl text-center text-[16px] leading-relaxed text-ink/70">{page.sub}</p>
       </Reveal>
 
+      <SectionNav items={csrNav} />
+
       {/* ───────────── Sections ───────────── */}
       <div className="mx-auto max-w-ledger px-5 pb-16 sm:px-8 sm:pb-20">
         <div className="space-y-14">
           {page.sections.map((s, i) => (
-            <CsrSection key={s.id} s={s} i={i} />
+            <CsrSection key={s.id} s={s} i={i} lang={lang} />
           ))}
         </div>
       </div>

@@ -15,11 +15,13 @@ import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import { founder, contact, connectPage } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
+import usePageTitle from "../hooks/usePageTitle";
 
 const featureIcons = { Send, ShieldCheck, Handshake, User };
 
 export default function Contact() {
   const [lang] = useLanguage();
+  usePageTitle("Contact | Yogendra Mishra, Direct Credit Group");
   const isEn = lang === "en";
   const features = isEn ? connectPage.featuresEn : connectPage.features;
   const reasons = isEn ? connectPage.reasonsEn : connectPage.reasons;

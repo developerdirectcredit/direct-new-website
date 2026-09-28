@@ -11,9 +11,13 @@ import LeaderCustomizedLendingSolutions from "./pages/media/LeaderCustomizedLend
 import TimesPowerIconAward from "./pages/media/TimesPowerIconAward";
 import CircleFutureArticle from "./pages/media/CircleFutureArticle";
 import Contact from "./pages/Contact";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 
 export default function App() {
   const path = window.location.pathname.replace(/\/+$/, "");
+  if (path === "/admin/login") return <AdminLogin />;
+  if (path === "/admin") return <AdminDashboard />;
   if (path === "/about") return <About />;
   if (path === "/vision-philosophy") return <VisionPhilosophy />;
   if (path === "/insights") return <Insights />;

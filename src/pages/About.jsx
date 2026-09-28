@@ -1,11 +1,14 @@
 import { useState } from "react";
+import React, { useEffect } from "react";
 import { ArrowRight, User, Rocket, Handshake, Award, Users, ChevronDown, GraduationCap, HeartHandshake, Flag, Quote, TrendingUp } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import PageNavCta from "../components/PageNavCta";
+import SectionNav from "../components/SectionNav";
 import { founder, aboutPage, aboutPageEn } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
+import usePageTitle from "../hooks/usePageTitle";
 import useHashScroll from "../hooks/useHashScroll";
 import linkifyDirectCredit from "../utils/linkify";
 
@@ -164,8 +167,18 @@ function StorySection({ s, i }) {
   );
 }
 
+const aboutNav = [
+  ["my-journey", "My Journey"],
+  ["family-journey", "Family Journey"],
+  ["education", "Education"],
+  ["team-leadership", "Team & Leadership"],
+  ["sports-lifestyle", "Sports & Lifestyle"],
+  ["favourite-things", "Favourite Things"],
+];
+
 export default function About() {
   const [lang] = useLanguage();
+  usePageTitle("My Journey | Yogendra Mishra, Direct Credit Group");
   useHashScroll();
   const page = lang === "en" ? aboutPageEn : aboutPage;
   return (
@@ -206,6 +219,10 @@ export default function About() {
           })}
         </div>
       </Reveal>
+
+      <div className="pt-6 sm:pt-8">
+        <SectionNav items={aboutNav} />
+      </div>
 
       <div id="my-journey" className="scroll-mt-24 border-t border-rule">
         <div className="mx-auto max-w-3xl px-5 py-3 text-center sm:px-8 sm:py-4">

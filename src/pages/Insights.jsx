@@ -41,6 +41,7 @@ import SectionHead from "../components/SectionHead";
 import PageNavCta from "../components/PageNavCta";
 import { founder, insightsPage, insightsPageEn } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
+import usePageTitle from "../hooks/usePageTitle";
 import linkifyDirectCredit from "../utils/linkify";
 
 const heroStatIcons = { User, Rocket, Handshake, Award, Users, BookOpen };
@@ -290,6 +291,7 @@ function InsightSection({ section, slug, tint }) {
 
 export default function Insights() {
   const [lang] = useLanguage();
+  usePageTitle("Insights | Yogendra Mishra on Financial Inclusion and MSME Credit");
   const page = lang === "en" ? insightsPageEn : insightsPage;
 
   return (
