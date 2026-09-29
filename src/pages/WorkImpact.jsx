@@ -1,28 +1,16 @@
-import { useEffect } from "react";
 import { ArrowRight, ArrowDown, ArrowUpRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import SectionHead from "../components/SectionHead";
+import SEO from "../components/SEO";
+import { pageSeo } from "../seo/seoConfig";
 import { founder, journey, workImpactPage, journeyNarrative } from "../data/content";
 
 export default function WorkImpact() {
-  useEffect(() => {
-    const prevTitle = document.title;
-    document.title = workImpactPage.seo.title;
-
-    let meta = document.querySelector('meta[name="description"]');
-    const prevDescription = meta?.getAttribute("content");
-    if (meta) meta.setAttribute("content", workImpactPage.seo.description);
-
-    return () => {
-      document.title = prevTitle;
-      if (meta && prevDescription != null) meta.setAttribute("content", prevDescription);
-    };
-  }, []);
-
   return (
     <div id="top">
+      <SEO {...pageSeo.workImpact} />
       <Navbar />
 
       {/* ───────────── Hero (banner, same as home page) ───────────── */}

@@ -1,5 +1,7 @@
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
+import { pageSeo } from "../../seo/seoConfig";
 import Reveal from "../../components/Reveal";
 import { circleFutureArticle as article } from "../../data/content";
 
@@ -10,6 +12,7 @@ const themeBadge = {
 export default function CircleFutureArticle() {
   return (
     <div id="top">
+      <SEO {...pageSeo.circleFutureArticle} />
       <Navbar />
 
       {/* ───────────── Hero ───────────── */}

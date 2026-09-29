@@ -6,7 +6,8 @@ import Reveal from "../components/Reveal";
 import PageNavCta from "../components/PageNavCta";
 import { founder, visionPage, visionPageEn } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
-import usePageTitle from "../hooks/usePageTitle";
+import SEO from "../components/SEO";
+import { pageSeo } from "../seo/seoConfig";
 import useHashScroll from "../hooks/useHashScroll";
 import linkifyDirectCredit from "../utils/linkify";
 
@@ -143,12 +144,12 @@ function PhilosophySection({ s, i }) {
 
 export default function VisionPhilosophy() {
   const [lang] = useLanguage();
-  usePageTitle("Vision and Philosophy | Yogendra Mishra, Direct Credit Group");
   useHashScroll();
   const page = lang === "en" ? visionPageEn : visionPage;
 
   return (
     <div id="top">
+      <SEO {...pageSeo.visionPhilosophy} />
       <Navbar />
 
       {/* ───────────── Hero ───────────── */}

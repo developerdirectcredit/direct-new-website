@@ -1,6 +1,8 @@
 import { Calendar, MapPin, List } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
+import { pageSeo } from "../../seo/seoConfig";
 import Reveal from "../../components/Reveal";
 import { timesPowerIconArticle as article } from "../../data/content";
 
@@ -14,6 +16,7 @@ const slugify = (s) =>
 export default function TimesPowerIconAward() {
   return (
     <div id="top">
+      <SEO {...pageSeo.timesPowerIconAward} />
       <Navbar />
 
       {/* ───────────── Hero ───────────── */}

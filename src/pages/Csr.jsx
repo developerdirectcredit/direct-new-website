@@ -8,7 +8,8 @@ import SectionHead from "../components/SectionHead";
 import PageNavCta from "../components/PageNavCta";
 import { founder, csrPage, csrPageEn } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
-import usePageTitle from "../hooks/usePageTitle";
+import SEO from "../components/SEO";
+import { pageSeo } from "../seo/seoConfig";
 import useHashScroll from "../hooks/useHashScroll";
 import useMediaItems from "../hooks/useMediaItems";
 import linkifyDirectCredit from "../utils/linkify";
@@ -283,12 +284,12 @@ const csrNav = [
 
 export default function Csr() {
   const [lang] = useLanguage();
-  usePageTitle("CSR and Social Impact | Direct Credit Group, Yogendra Mishra");
   useHashScroll();
   const page = lang === "en" ? csrPageEn : csrPage;
 
   return (
     <div id="top">
+      <SEO {...pageSeo.csr} />
       <Navbar />
 
       {/* ───────────── Banner ───────────── */}

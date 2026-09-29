@@ -7,7 +7,8 @@ import SectionHead from "../components/SectionHead";
 import PageNavCta from "../components/PageNavCta";
 import { founder, mediaPage, mediaPageEn, mediaReels } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
-import usePageTitle from "../hooks/usePageTitle";
+import SEO from "../components/SEO";
+import { pageSeo } from "../seo/seoConfig";
 import useHashScroll from "../hooks/useHashScroll";
 import linkifyDirectCredit from "../utils/linkify";
 
@@ -60,13 +61,13 @@ const mediaThemes = {
 
 export default function Achievements() {
   const [lang] = useLanguage();
-  usePageTitle("Recognition and Honours | Yogendra Mishra, Direct Credit");
   useHashScroll();
   const isEn = lang === "en";
   const page = isEn ? mediaPageEn : mediaPage;
 
   return (
     <div id="top">
+      <SEO {...pageSeo.recognitionHonours} />
       <Navbar />
 
       {/* ───────────── Banner ───────────── */}

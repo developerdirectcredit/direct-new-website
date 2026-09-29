@@ -41,7 +41,8 @@ import {
   faqsEn,
 } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
-import usePageTitle from "../hooks/usePageTitle";
+import SEO from "../components/SEO";
+import { pageSeo } from "../seo/seoConfig";
 import linkifyDirectCredit from "../utils/linkify";
 
 const companyIcons = { Building2, Leaf, HandCoins, Cpu };
@@ -50,7 +51,6 @@ const bannerSlides = ["/img/dcbanner%20(1).png", "/img/founder-banner.jpg"];
 
 export default function Founder() {
   const [lang] = useLanguage();
-  usePageTitle("Yogendra Mishra | Founder and MD, Direct Credit Group");
   const isEn = lang === "en";
   const [bannerIndex, setBannerIndex] = useState(0);
 
@@ -93,6 +93,7 @@ export default function Founder() {
 
   return (
     <div id="top">
+      <SEO {...pageSeo.home} />
       <Navbar />
 
       {/* ───────────── Hero ───────────── */}
@@ -326,7 +327,7 @@ export default function Founder() {
           />
           <AwardsGallery awards={awardsData} />
           <div className="mt-10 flex justify-center">
-            <a href="/recognition-honours" className="btn-ghost">
+            <a href="/media-speaking" className="btn-ghost">
               {t.seeAllMedia} <ArrowUpRight className="h-3.5 w-3.5" />
             </a>
           </div>

@@ -8,7 +8,8 @@ import PageNavCta from "../components/PageNavCta";
 import SectionNav from "../components/SectionNav";
 import { founder, aboutPage, aboutPageEn } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
-import usePageTitle from "../hooks/usePageTitle";
+import SEO from "../components/SEO";
+import { pageSeo } from "../seo/seoConfig";
 import useHashScroll from "../hooks/useHashScroll";
 import linkifyDirectCredit from "../utils/linkify";
 
@@ -178,11 +179,11 @@ const aboutNav = [
 
 export default function About() {
   const [lang] = useLanguage();
-  usePageTitle("My Journey | Yogendra Mishra, Direct Credit Group");
   useHashScroll();
   const page = lang === "en" ? aboutPageEn : aboutPage;
   return (
     <div id="top">
+      <SEO {...pageSeo.about} />
       <Navbar />
 
       {/* ───────────── Banner ───────────── */}
@@ -227,9 +228,9 @@ export default function About() {
       <div id="my-journey" className="scroll-mt-24 border-t border-rule">
         <div className="mx-auto max-w-3xl px-5 py-3 text-center sm:px-8 sm:py-4">
           <Reveal>
-            <h2 className="text-[clamp(1.9rem,4.4vw,3.1rem)] font-bold leading-[1.15] text-signal">
+            <h1 className="text-[clamp(1.9rem,4.4vw,3.1rem)] font-bold leading-[1.15] text-signal">
               {page.story.title}
-            </h2>
+            </h1>
           </Reveal>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { Calendar, MapPin, List } from "lucide-react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import SEO from "../../components/SEO";
+import { pageSeo } from "../../seo/seoConfig";
 import Reveal from "../../components/Reveal";
 import { bestAlternativeLendingArticle as article } from "../../data/content";
 
@@ -11,6 +13,7 @@ const themeBadge = {
 export default function BestAlternativeLendingAward() {
   return (
     <div id="top">
+      <SEO {...pageSeo.bestAlternativeLendingAward} />
       <Navbar />
 
       {/* ───────────── Hero ───────────── */}

@@ -17,7 +17,8 @@ import {
   galleryExtraVideos,
 } from "../data/content";
 import useLanguage from "../hooks/useLanguage";
-import usePageTitle from "../hooks/usePageTitle";
+import SEO from "../components/SEO";
+import { pageSeo } from "../seo/seoConfig";
 import useHashScroll from "../hooks/useHashScroll";
 import useMediaItems from "../hooks/useMediaItems";
 import MediaEmbedCard from "../components/MediaEmbedCard";
@@ -143,7 +144,6 @@ const mediaNav = [
 
 export default function MediaSpeaking() {
   const [lang] = useLanguage();
-  usePageTitle("Media and Speaking | Yogendra Mishra, Direct Credit Group");
   useHashScroll();
   const isEn = lang === "en";
   const mediaFbVideos = isEn ? facebookVideosEn : facebookVideos;
@@ -160,6 +160,7 @@ export default function MediaSpeaking() {
 
   return (
     <div id="top">
+      <SEO {...pageSeo.mediaSpeaking} />
       <Navbar />
 
       {/* ───────────── Banner ───────────── */}
