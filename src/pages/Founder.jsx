@@ -47,7 +47,7 @@ import linkifyDirectCredit from "../utils/linkify";
 
 const companyIcons = { Building2, Leaf, HandCoins, Cpu };
 
-const bannerSlides = ["/img/dcbanner%20(1).png", "/img/founder-banner.jpg"];
+const bannerSlides = ["/img/dcbanner%20(1).png", "/img/founder-banner.jpg", "/img/csr-banner.png"];
 
 export default function Founder() {
   const [lang] = useLanguage();
@@ -110,6 +110,15 @@ export default function Founder() {
               }`}
             />
           ))}
+          {/* CSR slide: sirf "CSR Work" button ke area par click -> /csr (slide active ho tabhi) */}
+          {bannerSlides[bannerIndex] === "/img/csr-banner.png" && (
+            <a
+              href="/csr"
+              aria-label="CSR Work"
+              className="absolute z-10 cursor-pointer"
+              style={{ left: "68.3%", top: "63%", width: "14.7%", height: "11.3%" }}
+            />
+          )}
         </div>
 
         {/* Name plate - hero ke neeche ek ledger bar */}
